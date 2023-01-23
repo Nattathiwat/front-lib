@@ -9,7 +9,7 @@
           </div>
           <div class="group-list-head">
             <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Form Controls' ? 'active':''" to="/">
+              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Form Controls' ? 'active':''" to="/component">
                 <div class="group-image">
                   <i class="bi bi-1-circle"></i>
                 </div>
@@ -17,7 +17,7 @@
               </router-link>
             </div>
             <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Validate' ? 'active':''" to="/validate">
+              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Validate' ? 'active':''" to="/component/validate">
                 <div class="group-image">
                   <i class="bi bi-2-circle"></i>
                 </div>
@@ -25,7 +25,7 @@
               </router-link>
             </div>
             <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Other' ? 'active':''" to="/other">
+              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Other' ? 'active':''" to="/component/other">
                 <div class="group-image">
                   <i class="bi bi-3-circle"></i>
                 </div>
@@ -33,7 +33,7 @@
               </router-link>
             </div>
             <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Table' ? 'active':''" to="/table">
+              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Table' ? 'active':''" to="/component/table">
                 <div class="group-image">
                   <i class="bi bi-4-circle"></i>
                 </div>

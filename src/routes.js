@@ -6,22 +6,22 @@ export default {
       component: () => import("./view/pageNotFound.vue"),
     },
     { 
-      path: '/', 
+      path: '/component', 
       name: 'Form Controls',
       component: () => import("./view/form.vue"),
     },
     { 
-      path: '/validate', 
+      path: '/component/validate', 
       name: 'Validate',
       component: () => import("./view/validate.vue"),
     },
     { 
-      path: '/other', 
+      path: '/component/other', 
       name: 'Other',
       component: () => import("./view/other.vue"),
     },
     { 
-      path: '/table', 
+      path: '/component/table', 
       name: 'Table',
       component: () => import("./view/table.vue"),
     },
