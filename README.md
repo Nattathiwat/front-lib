@@ -1,8 +1,8 @@
 # frontend
 
 This template should help get you started developing with Vue 3 in Vite.
-node v18.3.0
-npm 9.2.0
+node v18.13.0
+npm 8.19.3
 
 ## Recommended IDE Setup
 
