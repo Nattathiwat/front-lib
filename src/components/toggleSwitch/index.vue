@@ -3,7 +3,7 @@
     <label class="switch">
       <input  v-model="value"
               @change="change()"
-              :name="name+'switch'"
+              :name="name"
               :disabled="disabled"
               type="checkbox">
       <span class="slider round"></span>

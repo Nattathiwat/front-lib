@@ -9,7 +9,8 @@
 
     <cpn-pagination :page="pagination.page"
                     :total="pagination.total"
-                    :rows-per-page="pagination.perPage"
+                    :lastPage="pagination.lastPage"
+                    :perPage="pagination.perPage"
                     @pageChange="pageChange"
                     />
 
@@ -47,7 +48,8 @@ export default {
       pagination: {
         page: 7,
         total: 20,
-        perPage: 5
+        lastPage: 0,
+        perPage: 10
       },
       columns: [{
           style: 'min-width: 200px; width: 20%;',
@@ -88,7 +90,8 @@ export default {
   },
   methods: {
     pageChange(data) {
-      this.pagination.page = data
+      this.pagination.perPage = data.perPage
+      this.pagination.page = data.page
       console.log('pageChange', this.pagination.page, data)
     }
   }

@@ -79,7 +79,7 @@ export default {
   name: 'App',
   data() {
     return {
-      version: '1.0.0',
+      version: import.meta.env.VITE_APP_VERSION,
       hamburger: false,
       nameLogin: '',
       showLoading: false,

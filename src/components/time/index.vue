@@ -1,13 +1,12 @@
 <template>
   <div class="component-time">
-    <Field v-slot="{ field }" v-model="data" type="text" :name="name+'Time'" :rules="rules">
+    <Field v-slot="{ field }" v-model="data" type="text" :name="name" :rules="rules">
       <input v-show="false" v-bind="field">
     </Field>
     <Datepicker :model-value="time"
                 input-class-name="dp-custom-input"
                 menu-class-name="dp-custom-menu"
                 cancel-text="Reset" 
-                :close-on-auto-apply="false" 
                 :name="name+'Time'"
                 select-text="Ok"
                 locale="th" 
@@ -16,6 +15,7 @@
                 :enable-seconds="false"
                 :placeholder="placeholder ? placeholder : ''"
                 @update:model-value="setDate"
+                @closed="closedTime"
                 :autoApply="true"
                 :closeOnAutoApply="true"
                 >
@@ -27,14 +27,14 @@
         </div>
       </template>
     </Datepicker>
-    <ErrorMessage :name="name+'Time'" v-slot="{ message }"> 
+    <ErrorMessage :name="name" v-slot="{ message }"> 
       <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
     </ErrorMessage>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 
 export default {
   name: 'ComponentTime',
@@ -43,6 +43,7 @@ export default {
     'update:modelValue',
   ],
   setup(props, context) {
+    const assetsUtils = inject('assetsUtils')
     const data = ref();
     const time = ref({ 
       hours: '', // new Date().getHours(),
@@ -59,11 +60,20 @@ export default {
         data.value = (value.hours > 9 ? value.hours : '0' + value.hours) + ':' + (value.minutes > 9 ? value.minutes : '0' + value.minutes) + ':' + (value.seconds > 0 ? value.seconds : '0' + value.seconds);
       }
     }
+    const closedTime = () => {
+      console.log('inject', assetsUtils.currentTime())
+      if (!data.value) {
+        const Time = assetsUtils.currentTime()
+        context.emit('update:modelValue', Time);
+        data.value = Time
+      }
+    }
     return {
       time,
       setDate,
       data,
       first,
+      closedTime
     }
   },
   watch: {

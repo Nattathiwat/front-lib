@@ -1,5 +1,13 @@
 <template>
   <div class="component-pagination" v-show="total>0">
+    <div class="view-page">
+			แสดงผล
+			<select name="cars" v-model="pageSize"  class="page-size" @change="pageSizeHandleBlur(pageSize)">
+				<option v-for="(item, index) in totalArr" :key="index" :value="item">{{item}}</option>
+			</select>
+			จากทั้งหมด
+			{{total}}
+		</div>
     <Paginate
       v-model="pageActive"
       :page-count="total"
@@ -23,41 +31,100 @@ export default {
   name: 'component-pagination',
   data() {
     return {
-      pageActive: this.page
+      pageActive: this.page,
+      pageSize: this.perPage,
+			totalArr: [],
+      pageSizeTotal: 10,
     }
   },
   components: {
     Paginate
   },
-  props: {
-    page: {
-        type: Number,
-        default: () => 1,
-    },
-    total: {
-        type: Number,
-        default: () => 0,
-    },
-    rowsPerPage: {
-        type: Number,
-        default: () => 0,
-    },
-    maxVisible: {
-        type: Number,
-        default: () => 5,
-    },
-  },
+  props: ['page', 'total', 'perPage', 'lastPage'],
   methods: {
+    pageSizeHandleBlur() {
+			let newData = {
+				page: 1,
+				perPage: this.pageSize
+			}
+      this.$emit('pageChange', newData)
+    },
     clickCallback (pageNum) {
-      this.$emit('pageChange', pageNum)
+			let newData = {
+				page: pageNum,
+				perPage: this.pageSize
+			}
+      this.$emit('pageChange', newData)
+    },
+    setPages() {
+      this.pageActive = this.page ? parseInt(this.page) : 1
+      this.pageSize = this.perPage ? parseInt(this.perPage) : 50
+      this.totalArr = []
+			if (this.total < this.pageSizeTotal) {
+				this.totalArr.push(this.pageSizeTotal)
+			} else {
+				for (let index = 1; index <= this.total; index++) {
+					if (index % this.pageSizeTotal == 0) {
+						this.totalArr.push(index)
+					}
+				}
+				if (this.total % this.pageSizeTotal != 0) {
+					this.totalArr.push((this.totalArr[this.totalArr.length - 1]) + this.pageSizeTotal)
+				}
+			}
     }
   },
-
+  mounted () {
+		this.setPages();
+	},
+  watch: {
+    'total'() {
+			this.setPages();
+		},
+		'perPage'() {
+			this.setPages();
+		},
+		'lastPage'() {
+			this.setPages();
+		},
+		'page'() {
+			this.setPages();
+		}
+  }
 }
 </script>
 
 <style lang="scss">
   .component-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .view-page {
+      font-size: 16px;
+      font-weight: 500;
+      color: #3c4858;
+
+      .page-size {
+        width: 117px;
+        height: 35px;
+        margin: 0 17px 0 13px;
+        // padding: 11px 9px 11px 20px;
+        padding-left: 12px;
+        border: solid 1px #c1cfe3;
+        border-radius: 5px;
+        background-color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        color: #3c4858;
+      }
+
+      .page-size:focus {
+        outline: none;
+        box-shadow: 0px 0px;
+      }
+    }
+
     *, ::after, ::before {
       box-sizing: border-box;
     }
@@ -75,7 +142,6 @@ export default {
       > table {
         border: 2px solid rgba(#444, 50%);
         border-radius: 5px;
-        cell-padding: 0;
         border-spacing: 0;
         
         > thead {
@@ -123,6 +189,7 @@ export default {
         margin: 0;
 
         a.page-link {
+            cursor: pointer;
             min-width: 41px;
             height: 41px;
             display: flex;
@@ -130,15 +197,24 @@ export default {
             justify-content: center;
             background: transparent;
             padding: 0 12px;
+            color: #15466e;
         }
             
         &.active >
-        a.page-link,
-        > a.page-link:hover {
+        a.page-link {
             color: #fff;
             cursor: pointer;
-            border-color: #028ce8;
-            background-color: #028ce8;
+            border-color: #15466e;
+            background-color: #15466e;
+        }
+
+        a:focus {
+          box-shadow: none;
+        }
+      }
+      li.disabled {
+        a.page-link {
+          color: rgba(21, 70, 110, 0.53);
         }
       }
     }

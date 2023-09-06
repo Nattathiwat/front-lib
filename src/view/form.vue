@@ -158,6 +158,15 @@
                         :disabled="false"
                         @change="change" />
     </div>
+    <div class="group-input">
+      <div class="name">Input Tag Value: {{input13}}</div>
+      <cpn-input-tags v-model="input13"
+                      name="tag"
+                      :flagSearch="true"
+                      :optionSelect="optionSelect13"
+                      @keyup="inputTag"
+                      :disabled="input11" />
+    </div>
   </div>
 </template>
 <script>
@@ -180,9 +189,17 @@ export default {
       input10: '',
       input11: false,
       input12: '',
+      input13: [],
+      optionSelect13: [{ name: 'select1', value: '1' },{ name: 'select2', value: '2' },{ name: 'select3', value: '3' }],
     }
   },
   methods: {
+    inputTag(e) {
+      this.optionSelect13 = [{ name: 'select1', value: '1' },{ name: 'select2', value: '2' },{ name: 'select3', value: '3' }]
+      this.optionSelect13 = this.optionSelect13.filter(row => {
+        return (row.name.toString().toLowerCase().indexOf(e.target.value.toLowerCase()) > -1)
+      })
+    },
     keyupData(data) {
       this.optionSelect2 = [{ name: 'select1', value: '1' },{ name: 'select2', value: '2' },{ name: 'select3', value: '3' }]
       this.optionSelect2 = this.optionSelect2.filter(row => {

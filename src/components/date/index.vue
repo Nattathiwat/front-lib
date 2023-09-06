@@ -1,6 +1,6 @@
 <template>
   <div :style="this.style" :class="[this.class, 'component-date']">
-    <Field v-model="data" type="text" :name="name+'Date'" v-slot="{ field }" :rules="rules">
+    <Field v-model="data" type="text" :name="name" v-slot="{ field }" :rules="rules">
       <input v-bind="field"  v-show="false">
     </Field>
     <Datepicker :modelValue="date"
@@ -27,7 +27,7 @@
                 >
       <template #action-preview=""></template>
       <template #year="{ year }">{{ year + 543 }}</template>
-      <template #year-overlay="{ text, value }">{{ value + 543 }}</template>
+      <template #year-overlay-value="{ text }">{{ (+text + +543) }}</template>
       <template #input-icon>
         <div class="group-image" :class="[disabled? 'none-pointer' : '']">
           <i class="bi bi-calendar3 input-slot-image"></i>
@@ -35,7 +35,7 @@
         </div>
       </template>
     </Datepicker>
-    <ErrorMessage :name="name+'Date'" v-slot="{ message }"> 
+    <ErrorMessage :name="name" v-slot="{ message }"> 
       <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
     </ErrorMessage>
   </div>

@@ -73,6 +73,13 @@
                       placeholder="required"
                       rules="required"/>
       </div>
+      <div class="group-input">
+        <div class="name">Input Tag Value: {{input10}}</div>
+        <cpn-input-tags v-model="input10"
+                        name="input10"
+                        placeholder="required"
+                        rules="required" />
+      </div>
       <a href="https://vee-validate.logaretm.com/v4/guide/global-validators#Available%20Rules" target="_blank">เงื่อนไข validate (rules)</a>
       <br>
       <button type="reset" @click="reset" class="btn btn-danger me-3 mt-3">Clear</button>
@@ -96,6 +103,7 @@ export default {
       input7:'',
       input8:'',
       input9:'',
+      input10: []
     }
   },
   methods: {

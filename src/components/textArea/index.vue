@@ -7,7 +7,7 @@
             :class="[this.class, 'form-control']"
             :value="modelValue"
             @input="$emit('update:modelValue', $event.target.value)"
-            :name="name+'text-area'"
+            :name="name"
             :disabled="disabled"
             :placeholder="placeholder"
             :rows="rows"
@@ -18,7 +18,7 @@
             :validateOnInput="true"
             ref="textArea"
             />
-    <ErrorMessage :name="name+'text-area'" v-slot="{ message }">
+    <ErrorMessage :name="name" v-slot="{ message }">
       <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
     </ErrorMessage>
   </div>

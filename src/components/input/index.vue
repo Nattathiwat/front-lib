@@ -4,19 +4,22 @@
       <Field  v-model="value"
               :value="modelValue"
               @input="$emit('update:modelValue', $event.target.value)"
-              :name="name+'Input'"
+              :name="name"
               :type="type" 
               :rules="rules"
+              :autocomplete="type=='password' ? 'new-password' : 'off'"
               :class="['form-control', this.class]"
               :disabled="disabled"
               :placeholder="placeholder"
+              :maxlength="maxlength"
               :validateOnBlur="true"
               :validateOnChange="true"
               :validateOnInput="true"
+              @keypress="keypress"
               @keyup.enter="search(value)" />
       <button :disabled="disabled" v-show="searchFlag" @click="search(value)" class="button-search"><i class="bi bi-search icon-search"></i> ค้นหา</button>
     </div>
-    <ErrorMessage :name="name+'Input'" v-slot="{ message }">
+    <ErrorMessage :name="name" v-slot="{ message }">
       <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
     </ErrorMessage>
   </div>
@@ -30,6 +33,17 @@ export default {
     }
   },
   methods: {
+    keypress(evt) {
+      if (this.isNumber) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+          evt.preventDefault();
+        } else {
+          return true;
+        }
+      }
+    },
     search(data) {
       if (this.searchFlag) {
         this.$emit('searchClick', data)
@@ -44,9 +58,21 @@ export default {
   watch: {
     'modelValue'() {
       this.value = this.modelValue
+    },
+    'value'(newValue) {
+      if (newValue && this.numberFormatComma) {
+        this.$nextTick(() => {
+          this.$emit('update:modelValue', this.assetsUtils.numberFormatComma(newValue))
+        })
+      }
+      if (newValue && this.phoneFormatDash) {
+        this.$nextTick(() => {
+          this.$emit('update:modelValue', this.assetsUtils.phoneFormatDash(newValue))
+        })
+      }
     }
   },
-  props: ['modelValue', 'rules', 'name', 'type', 'disabled', 'placeholder', 'class', 'errorMessage', 'searchFlag']
+  props: ['modelValue', 'rules', 'name', 'type', 'disabled', 'placeholder', 'class', 'errorMessage', 'searchFlag', 'isNumber', 'maxlength', 'numberFormatComma', 'phoneFormatDash']
 };
 </script>
 

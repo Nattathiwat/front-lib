@@ -45,8 +45,14 @@ export function setupValidate (app) {
     if (document.querySelector(`[name="${firstError + 'Select'}"]`)) {
       document.querySelector(`[name="${firstError + 'Select'}"]`).focus()
     }
+    if (document.querySelector(`[name="${firstError + 'InputTags'}"]`)) {
+      document.querySelector(`[name="${firstError + 'InputTags'}"]`).focus()
+    }
     if (document.querySelector(`[name="${firstError + 'Date'}"]`)) {
       document.querySelector(`[name="${firstError + 'Date'}"]`).scrollIntoView({block: "center"})
+    }
+    if (document.querySelector(`[name="${firstError + 'DateRange'}"]`)) {
+      document.querySelector(`[name="${firstError + 'DateRange'}"]`).scrollIntoView({block: "center"})
     }
     if (document.querySelector(`[name="${firstError + 'Time'}"]`)) {
       document.querySelector(`[name="${firstError + 'Time'}"]`).scrollIntoView({block: "center"})

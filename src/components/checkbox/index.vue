@@ -3,13 +3,13 @@
     <label class="component-checkbox" v-bind:class="disabled ? 'disabled' : ''">
       <input  v-model="value"
               @change="change()"
-              :name="name+'checkbox'"
+              :name="name"
               :disabled="disabled"
               type="checkbox"
               />
-      <span class="checkmark" :style="this.style"/>
+      <span class="checkmark" :style="this.style"></span>
     </label>
-    <div class="name-checkbox">{{label}}</div>
+    <div class="name-checkbox" v-bind:class="!disabled ? 'pointer' : 'none-pointer'" @click="!disable ? value=!value : ''">{{label}}</div>
   </div>
 
 </template>

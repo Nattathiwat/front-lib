@@ -59,6 +59,9 @@ import time from "@/components/time/index.vue";
 //toggleSwitch
 import toggleSwitch from "@/components/toggleSwitch/index.vue";
 
+//inputTags
+import inputTags from "@/components/inputTags/index.vue";
+
 //sweetalert2
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -74,7 +77,7 @@ const router = createRouter({
 const app = createApp(App)
 
 setupValidate(app) // Validate
-app.config.globalProperties.assetsUtils = assetsUtils //assetsUtils
+app.provide('assetsUtils', assetsUtils); //assetsUtils
 app.component('Datepicker', Datepicker); //Datepicker
 app.component('cpnLoading', loading); //loading
 app.component('cpnModal', modal); //modal
@@ -90,8 +93,7 @@ app.component('cpnDatepicker', date); //date
 app.component('cpnDatepickerRange', dateRange); //dateRange
 app.component('cpnTime', time); //time
 app.component('cpnToggleSwitch', toggleSwitch); //toggleSwitch
-
-
+app.component('cpnInputTags', inputTags); //inputTags
 
 app.use(router) //router
 app.use(VueSweetalert2); //VueSweetalert2

@@ -4,7 +4,7 @@
       <input  v-model="data"
               class="radio-control"
               @change="change()"
-              :name="name+'radio'"
+              :name="name"
               :disabled="disabled"
               :value="value"
               type="radio"
@@ -47,9 +47,6 @@ export default {
   .component-radio {
     display: flex;
     height: 26px;
-
-    .name-radio {
-    }
 
     input:disabled ~ .checkmark{
       background-color: #ececec;

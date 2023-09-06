@@ -4,7 +4,7 @@
       <Field  :class="[this.class, 'form-control']"
               :style="this.style"
               v-model="value"
-              :name="name+'auto-complete'"
+              :name="name"
               autocomplete="off"
               v-on:keyup="onKeyup($event.target.value)"
               :validateOnBlur="true"
@@ -16,7 +16,7 @@
               :rules="rules"
               :type="type" />
       <i class="bi bi-chevron-down image-select"  @click="disabled ? '' : toggleDropdown()" :class="[disabled? 'disabled' : 'pointer']"></i>
-      <ErrorMessage :name="name+'auto-complete'" v-slot="{ message }">
+      <ErrorMessage :name="name" v-slot="{ message }">
         <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
       </ErrorMessage>
       <div class="dropdown-content" :style="dropdown ? 'display: block; overflow: auto;' : 'display: none;'">
@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       dropdown: false,
-      value: this.modelValue
+      value: this.modelValue,
+      oldValue: ''
     }
   },
   props: ['name', 'placeholder', 'modelValue', 'type', 'class', 'style', 'disabled', 'maxlength', 'rules', 'optionSelect', 'iconN', 'firstSelect', 'errorMessage'],
@@ -66,12 +67,12 @@ export default {
               if (row.name == this.value && this.value) {
                 check = false
                 this.$emit('update:modelValue', row.value)
-                this.$emit('change', row.value)
+                this.change(row.value)
               }
             })
             if (check) {
               this.$emit('update:modelValue', '')
-              this.$emit('change', '')
+              this.change()
               this.value = ''
               this.$emit('keyupData', '')
             }
@@ -82,9 +83,17 @@ export default {
     },
     select(data) {
       this.$emit('update:modelValue', data.value)
-      this.$emit('change', data.value)
+      this.change(data.value)
     
       this.dropdown = false
+    },
+    change(data) {
+      if (data != this.oldValue) {
+        this.$emit('change', data)
+      } else {
+        this.value = this.optionSelect.filter(row=>row.value == data)[0]?.name || ''
+      }
+      this.oldValue = data
     }
   },
   mounted () {
@@ -99,6 +108,7 @@ export default {
   watch: {
     'modelValue'() {
       this.value = this.optionSelect.filter(row=>row.value == this.modelValue)[0]?.name || ''
+      this.oldValue = this.modelValue
     }
   },
 }
@@ -107,28 +117,6 @@ export default {
 <style scoped lang="scss">
 .component-auto-complete {
   width: 100%;
-
-  .data-select {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-
-    .content-data-select {
-      height: 25px;
-      background-color: #EAEAEE;
-      border-radius: 12.5px;
-      padding: 2px 10px;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      font-weight: 400;
-      font-size: 13px;
-
-      .icon {
-        width: 12px;
-        height: 12px;
-      }
-    }
-  }
 
   .component-input {
     position: relative;
@@ -203,7 +191,7 @@ export default {
       text-align: left;
       z-index: 2;
       color: #0A1629;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 400;
       border-radius: 10px;
       left: 0;
@@ -219,9 +207,9 @@ export default {
       .dropdown-list {
         padding-left: 22px;
         padding-right: 22px;
-        padding-top: 15px;
-        padding-bottom: 15px;
-        min-height: 58px;
+        display: flex;
+        align-items: center;
+        min-height: 45px;
         width: 100%;
         cursor: pointer;
       }
