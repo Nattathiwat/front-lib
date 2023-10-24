@@ -3,27 +3,32 @@ export default {
     { 
       path: '/:pathMatch(.*)*', 
       name: 'PageNotFound',
-      component: () => import("./view/pageNotFound.vue"),
+      component: () => import("./view/example/pageNotFound.vue"),
     },
     { 
-      path: '/component', 
+      path: '/component/dashboard', 
+      name: 'Dashboard',
+      component: () => import("./view/example/dashboard.vue"),
+    },
+    { 
+      path: '/component/form', 
       name: 'Form Controls',
-      component: () => import("./view/form.vue"),
+      component: () => import("./view/example/form.vue"),
     },
     { 
       path: '/component/validate', 
       name: 'Validate',
-      component: () => import("./view/validate.vue"),
+      component: () => import("./view/example/validate.vue"),
     },
     { 
       path: '/component/other', 
       name: 'Other',
-      component: () => import("./view/other.vue"),
+      component: () => import("./view/example/other.vue"),
     },
     { 
       path: '/component/table', 
       name: 'Table',
-      component: () => import("./view/table.vue"),
+      component: () => import("./view/example/table.vue"),
     },
   ]
 };

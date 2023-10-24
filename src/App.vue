@@ -9,7 +9,15 @@
           </div>
           <div class="group-list-head">
             <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Form Controls' ? 'active':''" to="/component">
+              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Dashboard' ? 'active':''" to="/component/dashboard">
+                <div class="group-image">
+                  <i class="bi bi-0-circle"></i>
+                </div>
+                Dashboard
+              </router-link>
+            </div>
+            <div class="list-navbar-group">
+              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Form Controls' ? 'active':''" to="/component/form">
                 <div class="group-image">
                   <i class="bi bi-1-circle"></i>
                 </div>
