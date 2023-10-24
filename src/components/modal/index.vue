@@ -26,7 +26,7 @@
             <button v-show="modalData.btnSave" type="button" @click="confirmModal()" class="btn btn-success">
               <div class="group-name">
                 <i class="bi bi-check-circle image-icon"></i>
-                <div class="name">บันทึก1</div>
+                <div class="name">บันทึก</div>
               </div>
             </button>
           </div>
