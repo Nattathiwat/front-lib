@@ -15,11 +15,12 @@
     </div>
     <div class="mt-5">
       <h2 class="name mt-5">modal</h2>
-      <button class="btn btn-primary mt-3 mb-2" @click="show2()">show modal vue</button>
+      <button class="btn btn-primary mt-3 mb-2" @click="show2()">show modal vue</button> <br>
+      <button class="btn btn-primary mt-3 mb-2" @click="show3()">show modal2 vue</button>
       <!-- conponent modal -->
       <cpn-modal :modalData="modalData" />
+      <cpn-modal2 :modalData="modalData2" />
       <br>
-
       <!-- Modal bootstrap -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         show modal bootstrap
@@ -63,6 +64,9 @@ export default {
         title: 'title',
         message: 'message'
       },
+      modalData2: {
+        showModal: false,
+      },
     }
   },
   methods: {
@@ -74,6 +78,9 @@ export default {
     },
     show2() {
       this.modalData.showModal = true
+    },
+    show3() {
+      this.modalData2.showModal = true
     },
     sweetalert2() {
       this.$swal({

@@ -22,6 +22,7 @@ import loading from "@/components/loading/index.vue";
 
 //modal
 import modal from "@/components/modal/index.vue";
+import modal2 from "@/components/modal/index2.vue";
 
 //table
 import table from "@/components/table/index.vue";
@@ -81,6 +82,7 @@ app.provide('assetsUtils', assetsUtils); //assetsUtils
 app.component('Datepicker', Datepicker); //Datepicker
 app.component('cpnLoading', loading); //loading
 app.component('cpnModal', modal); //modal
+app.component('cpnModal2', modal2); //modal
 app.component('cpnTable', table); //table
 app.component('cpnPagination', pagination); //pagination
 app.component('cpnInput', input); //input
