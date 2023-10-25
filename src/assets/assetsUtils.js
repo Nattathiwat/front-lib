@@ -2,6 +2,7 @@
 const months = [ 'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.',]; 
 const months_Long = [ "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม", ];
 
+import breadcrumb from './breadcrumbs.js'
 
 export default {
   currentDate() {
@@ -86,5 +87,20 @@ export default {
     } else {
       return ''
     }
+  },
+  breadcrumbs(route) {
+    console.log(route)
+    // breadcrumb.data
+    let data = []
+    route.matched.filter((item, index) => {
+      data.push({
+        name: breadcrumb.data[item.name],
+        path: item.name
+      })
+    })
+    if (route.matched.length > 0) {
+      data[route.matched.length-1].query = route.query
+    }
+    return data
   }
 }

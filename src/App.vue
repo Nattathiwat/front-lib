@@ -58,8 +58,9 @@
         <div class="header-index-left">
           <i class="bi bi-list icon-hamburger pointer"  @click="hamburger = !hamburger"></i>
           <div class="breadcrumbs">
-            <div class='active'>
-              {{ breadcrumbs }}
+            <div v-for="(item, index) in breadcrumbs" :key="index">
+              <span :class="[$route.name == item.path ? 'active' : '', item.path ? 'pointer' : 'none-pointer']" @click="$router.push({name: item.path, query: item.query})">{{item.name}}</span>
+              <span v-show="breadcrumbs.length>0 && index!=(breadcrumbs.length-1)" class="none-pointer space">/</span>
             </div>
           </div>
         </div>
@@ -83,6 +84,7 @@
   </div>
 </template>
 <script>
+import assetsUtils from './assets/assetsUtils.js'
 export default {
   name: 'App',
   data() {
@@ -99,7 +101,7 @@ export default {
   },
   computed: {
     breadcrumbs() {
-      return this.$route.name
+      return assetsUtils.breadcrumbs(this.$route)
     },
   },
   methods: {
