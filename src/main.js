@@ -68,12 +68,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 //routes
-import { createRouter, createWebHistory } from 'vue-router';
-import routes from './routes.js';
-const router = createRouter({
-  history: createWebHistory(),
-  routes: routes.routes
-});
+import router from './routes.js'
 
 const app = createApp(App)
 
