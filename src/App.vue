@@ -147,7 +147,7 @@ export default {
     width: 100%;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: $color-detail-background;
     overflow: auto;
     margin-bottom: -80px;
     padding-bottom: 80px;
@@ -155,7 +155,7 @@ export default {
     .header-index {
       transition: padding 1s ease-in-out;
       height: 75px;
-      background-color: #f5f5f5;
+      background-color: $color-header-index;
       position: fixed;
       width: 100%;
       z-index: 1;
@@ -270,7 +270,7 @@ export default {
       position: fixed;
       height: 100vh;
       width: 310px;
-      background-color: white;
+      background-color: $color-navigation;
       z-index: 99;
 
       .icon-triangle {
