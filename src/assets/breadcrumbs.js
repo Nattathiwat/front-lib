@@ -1,10 +1,10 @@
-  export default {
-    data: {
-      Component: 'ส่วนประกอบ',
-      Dashboard: 'แดชบอร์ด',
-      FormControls: 'ฟอร์ม',
-      Validate: 'แจ้งเตือน',
-      Other: 'อื่นๆ',
-      Table: 'ตาราง'
-    }
+export default {
+  data: {
+    example: 'ตัวอย่าง',
+    dashboard: 'แดชบอร์ด',
+    form: 'ฟอร์ม',
+    validate: 'แจ้งเตือน',
+    other: 'อื่นๆ',
+    table: 'ตาราง'
   }
+}

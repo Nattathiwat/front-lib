@@ -89,8 +89,6 @@ export default {
     }
   },
   breadcrumbs(route) {
-    console.log(route)
-    // breadcrumb.data
     let data = []
     route.matched.filter((item, index) => {
       data.push({

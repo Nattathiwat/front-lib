@@ -1,5 +1,4 @@
 <template>
-
   <div class="index-templete">
     <div class="detail-index-page">
       <transition name="navigation-ham" @enter="enter" @after-enter="afterEnter" @leave="leave">
@@ -9,7 +8,7 @@
           </div>
           <div class="group-list-head">
             <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Dashboard' ? 'active':''" to="/component/dashboard">
+              <router-link class="list-navbar pointer none-a" @click="removeSelect('dashboard')" :class="$route.name == 'dashboard' ? 'active':''" to="/dashboard">
                 <div class="group-image">
                   <i class="bi bi-0-circle"></i>
                 </div>
@@ -17,31 +16,33 @@
               </router-link>
             </div>
             <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Form Controls' ? 'active':''" to="/component/form">
+              <div class="list-navbar pointer" @click="removeSelect('example'), iconAngle.example = !iconAngle.example">
+                <div class="group-image">
+                  <i class="bi bi-1-circle"></i>
+                </div>
+                ตัวอย่าง
+                <i v-show="!iconAngle.example" class="bi bi-caret-right pointer"></i>
+                <i v-show="iconAngle.example" class="bi bi-caret-down pointer"></i>
+              </div>
+              <router-link v-show="iconAngle.example" class="list-navbar pointer none-a" :class="$route.name == 'form' ? 'active':''" to="/example/form">
                 <div class="group-image">
                   <i class="bi bi-1-circle"></i>
                 </div>
                 Form Controls
               </router-link>
-            </div>
-            <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Validate' ? 'active':''" to="/component/validate">
+              <router-link v-show="iconAngle.example" class="list-navbar pointer none-a" :class="$route.name == 'validate' ? 'active':''" to="/example/validate">
                 <div class="group-image">
                   <i class="bi bi-2-circle"></i>
                 </div>
                 Validate
               </router-link>
-            </div>
-            <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Other' ? 'active':''" to="/component/other">
+              <router-link v-show="iconAngle.example" class="list-navbar pointer none-a" :class="$route.name == 'other' ? 'active':''" to="/example/other">
                 <div class="group-image">
                   <i class="bi bi-3-circle"></i>
                 </div>
                 Other
               </router-link>
-            </div>
-            <div class="list-navbar-group">
-              <router-link class="list-navbar pointer none-a" :class="breadcrumbs == 'Table' ? 'active':''" to="/component/table">
+              <router-link v-show="iconAngle.example" class="list-navbar pointer none-a" :class="$route.name == 'table' ? 'active':''" to="/example/table">
                 <div class="group-image">
                   <i class="bi bi-4-circle"></i>
                 </div>
@@ -95,8 +96,10 @@ export default {
       showLoading: false,
       data:{
         logoImage: ''
+      },
+      iconAngle: {
+        example: false
       }
-      
     }
   },
   computed: {
@@ -105,39 +108,57 @@ export default {
     },
   },
   methods: {
-      enter(element) {
-        element.style.position = 'absolute';
-        element.style.visibility = 'hidden';
-        element.style.width = 'auto';
+    enter(element) {
+      element.style.position = 'absolute';
+      element.style.visibility = 'hidden';
+      element.style.width = 'auto';
 
-        const width = getComputedStyle(element).width;
+      const width = getComputedStyle(element).width;
 
-        element.style.width = null;
-        element.style.position = null;
-        element.style.visibility = null;
-        element.style.width = 0;
+      element.style.width = null;
+      element.style.position = null;
+      element.style.visibility = null;
+      element.style.width = 0;
 
-        getComputedStyle(element).width;
+      getComputedStyle(element).width;
 
-        requestAnimationFrame(() => {
-          element.style.width = width;
-        });
-      },
-      afterEnter(element) {
-        element.style.width = 'auto';
-      },
-      leave(element) {
-        const width = getComputedStyle(element).width;
-        
+      requestAnimationFrame(() => {
         element.style.width = width;
+      });
+    },
+    afterEnter(element) {
+      element.style.width = 'auto';
+    },
+    leave(element) {
+      const width = getComputedStyle(element).width;
+      
+      element.style.width = width;
 
-        getComputedStyle(element).width;
+      getComputedStyle(element).width;
 
-        requestAnimationFrame(() => {
-          element.style.width = 0;
-        });
-      },
+      requestAnimationFrame(() => {
+        element.style.width = 0;
+      });
+    },
+    removeSelect(data) {
+      for (let item in this.iconAngle) {
+        if (item != data) {
+          this.iconAngle[item] = false
+        }
+      }
+    },
+    checkDisplay() {
+      this.removeSelect()
+      if (this.$route.name == 'form' || this.$route.name == 'validate' || this.$route.name == 'other' || this.$route.name == 'table') {
+        this.iconAngle.example = true
+      }
+    }
   },
+  watch: {
+    '$route'() {
+      this.checkDisplay()
+    }
+  }
 };
 </script>
 
