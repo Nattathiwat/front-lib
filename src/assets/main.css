@@ -65,3 +65,7 @@ input::-ms-reveal, input::-ms-clear {
   margin-top: 5px;
   margin-left: 10px;
 }
+
+.required {
+  color: red;
+}

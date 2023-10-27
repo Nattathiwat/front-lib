@@ -18,6 +18,8 @@
               @keypress="keypress"
               @keyup.enter="search(value)" />
       <button :disabled="disabled" v-show="searchFlag" @click="search(value)" class="button-search"><i class="bi bi-search icon-search"></i> ค้นหา</button>
+      <i class="bi bi-eye pointer icon-eye" @click="type = 'password'" v-show="icon == 'eye' && type == 'text'"></i>
+      <i class="bi bi-eye-slash pointer icon-eye" @click="type = 'text'" v-show="icon == 'eye' && type == 'password'"></i>
     </div>
     <ErrorMessage :name="name" v-slot="{ message }">
       <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
@@ -72,7 +74,7 @@ export default {
       }
     }
   },
-  props: ['modelValue', 'rules', 'name', 'type', 'disabled', 'placeholder', 'class', 'errorMessage', 'searchFlag', 'isNumber', 'maxlength', 'numberFormatComma', 'phoneFormatDash']
+  props: ['modelValue', 'rules', 'name', 'type', 'disabled', 'placeholder', 'class', 'errorMessage', 'searchFlag', 'isNumber', 'maxlength', 'numberFormatComma', 'phoneFormatDash', 'icon']
 };
 </script>
 
@@ -95,6 +97,13 @@ export default {
     width: 100%;
     height: 45px;
     padding: 0 16px;
+  }
+
+  .icon-eye {
+    position: absolute;
+    right: 15px;
+    color: $color-primary;
+    font-size: 22px;
   }
 
   .button-search {
@@ -162,6 +171,9 @@ export default {
   }
 
   ::-webkit-input-placeholder { line-height: normal; }
-
+  
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  }
 }
 </style>

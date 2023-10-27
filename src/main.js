@@ -70,6 +70,14 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 //routes
 import router from './routes.js'
 
+//axios
+import axios from 'axios'
+
+axios.defaults.baseURL = import.meta.env.VITE_APP_BASE_URL;
+const axiosInstance = axios.create({
+  withCredentials: true,
+})
+
 const app = createApp(App)
 
 setupValidate(app) // Validate
@@ -94,5 +102,7 @@ app.component('cpnInputTags', inputTags); //inputTags
 
 app.use(router) //router
 app.use(VueSweetalert2); //VueSweetalert2
+
+app.config.globalProperties.axios = { ...axiosInstance }
 
 app.mount('#app')
