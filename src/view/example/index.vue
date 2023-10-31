@@ -154,6 +154,9 @@ export default {
       }
     }
   },
+  mounted() {
+    this.checkDisplay()
+  },
   watch: {
     '$route'() {
       this.checkDisplay()

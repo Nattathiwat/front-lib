@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [{ 
       path: '/:pathMatch(.*)*', 
       name: 'pageNotFound',
-      component: () => import("./view/example/component/pageNotFound.vue")
+      component: () => import("./view/pageNotFound/index.vue")
     }, { 
       path: '/', 
       redirect: { name: 'login' }
@@ -18,29 +18,29 @@ const router = createRouter({
       name: 'resetPassword',
       component: () => import("./view/login/resetPassword.vue")
     }, { 
-      path: '/dashboard', 
-      name: 'dashboard',
-      component: () => import("./view/example/component/dashboard.vue")
+      path: '/home', 
+      name: 'home',
+      component: () => import("./view/home/index.vue")
     },  { 
       path: '/chart', 
       name: 'chart',
-      component: () => import("./view/example/component/chart.vue")
+      component: () => import("./view/chart/index.vue")
     }, { 
       path: '/permission', 
       name: 'permission',
-      component: () => import("./view/example/component/permission.vue")
+      component: () => import("./view/permission/index.vue")
     },  { 
       path: '/user', 
       name: 'user',
-      component: () => import("./view/example/component/user.vue")
+      component: () => import("./view/user/index.vue")
     },  { 
       path: '/report', 
       name: 'report',
-      component: () => import("./view/example/component/report.vue")
+      component: () => import("./view/report/index.vue")
     },   { 
       path: '/setting', 
       name: 'setting',
-      component: () => import("./view/example/component/setting.vue")
+      component: () => import("./view/setting/index.vue")
     }, { 
       path: '/example', 
       name: 'example',

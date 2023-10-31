@@ -2,7 +2,7 @@
 <template>
   <div class="dashboard">
     <h2 class="name mb-4">Dashboard</h2>
-    123
+    12
     <canvas id="myChart"></canvas>
     <br><br><br><br><br>
     <canvas id="myChart2"></canvas>
@@ -11,7 +11,7 @@
 <script>
 import Chart from 'chart.js/auto';
 export default {
-  name: 'permision',
+  name: 'dashboard',
   data() {
     return {
       configChart: {
