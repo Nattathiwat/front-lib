@@ -23,7 +23,6 @@
       <template #input-icon>
         <div class="group-image" :class="[disabled? 'none-pointer' : '']">
           <i class="bi bi-clock input-slot-image"></i>
-          <div class="line-up"></div>
         </div>
       </template>
     </Datepicker>
@@ -116,52 +115,54 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+  $color-disabled: #F2F4F7;
+  $color-text: #101828;
+  $color-placeholder: #98A2B3;
+  $color-border: #E4E7EC;
+  $color-background: #ffffff;
 .component-time {
   width: 100%;
 
   .group-image {
     display: flex;
     align-items: center;
+    width: 24px;
+    height: 24px;
+    // margin-right: 16px;
+    margin-right: 14px;
+    margin-top: 4px;
 
     .input-slot-image {
       font-size: 22px;
-      margin-left: -2px;
-      margin-right: 10px;
-      color: #212529;
-    }
-
-    .line-up {
-      height: 44px;
-      width: 1px;
-      background: #ced4da;
+      color: #667085;
     }
   }
 
   ::-webkit-input-placeholder {
     font-size: 16px;
-    color: #212529;
+    color: $color-placeholder;
     opacity: 0.7;
     text-align: left;
-    font-weight: 500;
-    line-height: 60px;
+    font-weight: 400;
+    line-height: 24px;
   }
 
   :-ms-input-placeholder {
     font-size: 16px;
-    color: #212529;
+    color: $color-placeholder;
     opacity: 0.7;
     text-align: left;
-    font-weight: 500;
-    line-height: 60px;
+    font-weight: 400;
+    line-height: 24px;
   }
 
   ::placeholder {
     font-size: 16px;
-    color: #212529;
+    color: $color-placeholder;
     opacity: 0.7;
     text-align: left;
-    font-weight: 500;
-    line-height: 60px;
+    font-weight: 400;
+    line-height: 24px;
   }
 }
 </style>

@@ -63,6 +63,9 @@ import toggleSwitch from "@/components/toggleSwitch/index.vue";
 //inputTags
 import inputTags from "@/components/inputTags/index.vue";
 
+//example
+import example from "@/view/example/index.vue";
+
 //sweetalert2
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -99,6 +102,7 @@ app.component('cpnDatepickerRange', dateRange); //dateRange
 app.component('cpnTime', time); //time
 app.component('cpnToggleSwitch', toggleSwitch); //toggleSwitch
 app.component('cpnInputTags', inputTags); //inputTags
+app.component('cpnExample', example); //example
 
 app.use(router) //router
 app.use(VueSweetalert2); //VueSweetalert2

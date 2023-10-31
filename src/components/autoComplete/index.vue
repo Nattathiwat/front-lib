@@ -15,7 +15,11 @@
               :maxlength="maxlength"
               :rules="rules"
               :type="type" />
-      <i class="bi bi-chevron-down image-select"  @click="disabled ? '' : toggleDropdown()" :class="[disabled? 'disabled' : 'pointer']"></i>
+      <div @click="disabled ? '' : toggleDropdown()" class="image-select" :class="[disabled? 'disabled' : 'pointer']">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 10L12 15L17 10" stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
       <ErrorMessage :name="name" v-slot="{ message }">
         <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
       </ErrorMessage>
@@ -115,6 +119,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  $color-disabled: #F2F4F7;
+  $color-text: #101828;
+  $color-placeholder: #98A2B3;
+  $color-border: #E4E7EC;
+  $color-background: #ffffff;
+
 .component-auto-complete {
   width: 100%;
 
@@ -124,21 +134,19 @@ export default {
 
   
     .form-control {
-      color: #212529 ;
-      border: 1px solid #ced4da;
-      border-radius: 5px;
+      font-size: 16px;
+      color: $color-text;
+      border: 1px solid $color-border;
+      border-radius: 8px;
+      background-color: $color-background;
       width: 100%;
-      height: 45px;
-      padding: 0 16px;
+      height: 44px;
+      padding: 11px 16px 10px;
     }
 
     .form-control:disabled, .form-control[readonly] {
-      background-color: #ececec;
+      background-color: $color-disabled;
       opacity: 0.7;
-    }
-
-    .disabled {
-      color: rgba(16, 16, 16, 0.3);
     }
 
     .form-control:focus {
@@ -148,38 +156,39 @@ export default {
 
     ::-webkit-input-placeholder {
       font-size: 16px;
-      color: #212529;
+      color: $color-placeholder;
       opacity: 0.7;
       text-align: left;
-      font-weight: 500;
-      line-height: 60px;
+      font-weight: 400;
+      line-height: 24px;
     }
 
     :-ms-input-placeholder {
       font-size: 16px;
-      color: #212529;
+      color: $color-placeholder;
       opacity: 0.7;
       text-align: left;
-      font-weight: 500;
-      line-height: 60px;
+      font-weight: 400;
+      line-height: 24px;
     }
 
     ::placeholder {
       font-size: 16px;
-      color: #212529;
+      color: $color-placeholder;
       opacity: 0.7;
       text-align: left;
-      font-weight: 500;
-      line-height: 60px;
+      font-weight: 400;
+      line-height: 24px;
     }
 
     ::-webkit-input-placeholder { line-height: normal; }
 
-    .image-select {
+    .pointer, .disabled {
+      width: 24px;
+      height: 24px;
       position: absolute;
-      right: 17px;
-      top: 11px;
-      font-size: 18px;
+      right: 16px;
+      top: 10px;
     }
 
     .dropdown-content {
@@ -190,10 +199,10 @@ export default {
       box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.16);
       text-align: left;
       z-index: 2;
-      color: #0A1629;
+      color: $color-text;
       font-size: 16px;
       font-weight: 400;
-      border-radius: 10px;
+      border-radius: 8px;
       left: 0;
       right: 0;
       margin-top: 8px;
@@ -205,11 +214,8 @@ export default {
       }
 
       .dropdown-list {
-        padding-left: 22px;
-        padding-right: 22px;
-        display: flex;
-        align-items: center;
-        min-height: 45px;
+        padding: 12px 16px 10px 16px;
+        min-height: 44px;
         width: 100%;
         cursor: pointer;
       }

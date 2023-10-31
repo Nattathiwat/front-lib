@@ -4,7 +4,6 @@
     <h2 class="name mb-4">table Component</h2>
     <cpn-table  :columns="columns"
                 :data="data"
-                :pagination="true"
                  />
 
     <cpn-pagination :page="pagination.page"

@@ -12,8 +12,12 @@
             :disabled="disabled"
             >
       <div class="name-dropdown">{{data ? data : placeholder}}</div>
-      <i class="bi bi-chevron-down" :class="[disabled? 'disabled' : 'pointer']"></i>
     </button>
+    <div @click="disabled ? '' : toggleDropdown()" class="image-select" :class="[disabled? 'disabled' : 'pointer']">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 10L12 15L17 10" stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
     <ErrorMessage :name="name" v-slot="{ message }">
       <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
     </ErrorMessage>
@@ -89,44 +93,58 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+  $color-disabled: #F2F4F7;
+  $color-text: #101828;
+  $color-placeholder: #98A2B3;
+  $color-border: #E4E7EC;
+  $color-background: #ffffff;
+
 .component-select {
   position: relative;
   display: inline-block;
   width: 100%;
 
   .flex-right-dropdown:disabled, .flex-right-dropdown[readonly] {
-    background-color: #ececec;
+    background-color: $color-disabled;
     opacity: 0.7;
   }
 
   .flex-right-dropdown {
-    display: flex;
-    height: 45px;
+    color: $color-text ;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    background-color: $color-background;
     width: 100%;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    background-color: #ffffff;
+    height: 44px;
+    padding: 14px 16px 10px;
+    display: flex;
     position: relative;
     align-items: center;
     justify-content: space-between;
-    padding-left: 16px;
-    padding-right: 16px;
 
     .name-dropdown {
-      color: #212529;
-      padding-right: 10px;
-      font-size: 16px ;
-      opacity: 0.7 ;
-      text-align: left ;
-      font-weight: 500 ;
+      font-size: 16px;
+      color: $color-placeholder;
+      opacity: 0.7;
+      text-align: left;
+      font-weight: 400;
+      line-height: 24px;
     }
   }
 
   .colorBlack .name-dropdown {
+    color: $color-text;
     padding-right: 10px;
     opacity: 1;
   }
-
+  
+  .pointer, .disabled {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 16px;
+    top: 10px;
+  }
   .dropdown-content {
     display: none;
     position: absolute;
@@ -135,10 +153,10 @@ export default {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.16);
     text-align: left;
     z-index: 2;
-    color: #0A1629;
-    font-size: 20px;
+    color: $color-text;
+    font-size: 16px;
     font-weight: 400;
-    border-radius: 10px;
+    border-radius: 8px;
     left: 0;
     right: 0;
     margin-top: 8px;
@@ -150,11 +168,8 @@ export default {
     }
 
     .dropdown-List {
-      padding-left: 22px;
-      padding-right: 22px;
-      padding-top: 15px;
-      padding-bottom: 15px;
-      min-height: 58px;
+      padding: 12px 16px 10px 16px;
+      min-height: 44px;
       width: 100%;
       cursor: pointer;
     }
@@ -166,11 +181,6 @@ export default {
       margin: 0px !important;
       padding: 0px !important;
     }
-  }
-
-  .pointer {
-    font-size: 18px;
-    margin-top: 5px;
   }
 }
 </style>

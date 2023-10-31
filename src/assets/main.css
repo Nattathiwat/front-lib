@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@200;300;400;500;600;700;800;900&display=swap');
 
 html, body {
   background: #FFFCF5;
@@ -11,7 +11,7 @@ html, body {
 }
 
 * {
-  font-family: 'Bai Jamjuree', sans-serif !important;
+  font-family: 'Noto Sans Thai', sans-serif !important;
 }
 
 .pointer {

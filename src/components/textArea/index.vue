@@ -39,9 +39,9 @@ export default {
       let area = data.target;
       if (area.value) {
         setTimeout(function(){
-          area.style.height = 'auto';
-          area.style.padding = '8px 15px';
-          area.style.height = area.scrollHeight + 'px';
+          // area.style.height = 'auto';
+          // area.style.padding = '9px 16px 8px';
+          // area.style.height = area.scrollHeight + 'px';
         },0);
       }
     }
@@ -55,20 +55,28 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  $color-disabled: #F2F4F7;
+  $color-text: #101828;
+  $color-placeholder: #98A2B3;
+  $color-border: #E4E7EC;
+  $color-background: #ffffff;
 .component-text-area {
   .form-control {
-    resize: vertical;
-    width: 100%;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    padding: 8px 16px;
+    // resize: vertical;
+    resize: none;
     font-size: 16px;
-    color: #212529;
-    min-height: 45px;
+    line-height: 24px;
+    color: $color-text;
+    border: 1px solid $color-border;
+    border-radius: 8px;
+    background-color: $color-background;
+    width: 100%;
+    min-height: 44px;
+    padding: 9px 16px 8px;
   }
 
   .form-control:disabled, .form-control[readonly] {
-    background-color: #ececec;
+    background-color: $color-disabled;
     opacity: 0.7;
   }
 
@@ -79,29 +87,29 @@ export default {
 
   ::-webkit-input-placeholder {
     font-size: 16px;
-    color: #212529;
+    color: $color-placeholder;
     opacity: 0.7;
     text-align: left;
-    font-weight: 500;
-    line-height: 60px;
+    font-weight: 400;
+    line-height: 24px;
   }
 
   :-ms-input-placeholder {
     font-size: 16px;
-    color: #212529;
+    color: $color-placeholder;
     opacity: 0.7;
     text-align: left;
-    font-weight: 500;
-    line-height: 60px;
+    font-weight: 400;
+    line-height: 24px;
   }
 
   ::placeholder {
     font-size: 16px;
-    color: #212529;
+    color: $color-placeholder;
     opacity: 0.7;
     text-align: left;
-    font-weight: 500;
-    line-height: 60px;
+    font-weight: 400;
+    line-height: 24px;
   }
 
   ::-webkit-input-placeholder { line-height: normal; }

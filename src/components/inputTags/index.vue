@@ -154,126 +154,128 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.component-input-tags {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-
-  .group-input-tags {
-    display: flex;
-    flex-wrap: wrap;
-    height: 45px;
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    background-color: #ffffff;
+  $color-disabled: #F2F4F7;
+  $color-text: #101828;
+  $color-placeholder: #98A2B3;
+  $color-border: #E4E7EC;
+  $color-background: #ffffff;
+  .component-input-tags {
     position: relative;
-    align-items: center;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 6px;
+    display: inline-block;
+    width: 100%;
 
-    .tags-box {
-      background: rgba(0, 0, 0, 0.1);
-      padding-left: 8px;
-      padding-right: 5px;
-      border-radius: 5px;
+    .group-input-tags {
       display: flex;
+      flex-wrap: wrap;
+      height: 45px;
+      width: 100%;
+      border: 1px solid $color-border;
+      border-radius: 8px;
+      background-color: $color-background;
+      position: relative;
       align-items: center;
-      height: 30px;
-      margin-right: 10px;
-      margin-top: 6px;
-      
-      .icon-close {
-        margin-left: 8px;
-        font-size: 14px;
+      padding-left: 11px;
+      padding-right: 10px;
+      padding-bottom: 6px;
+
+      .tags-box {
+        background: rgba(0, 0, 0, 0.1);
+        padding-left: 8px;
+        padding-right: 5px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        height: 30px;
+        margin-right: 10px;
+        margin-top: 6px;
+        
+        .icon-close {
+          margin-left: 8px;
+          font-size: 14px;
+        }
+      }
+
+      input {
+        border: 0px;
+        flex: 1;
       }
     }
 
-    input {
-      border: 0px;
-      flex: 1;
+    input:focus {
+      outline: none;
+      box-shadow: 0px 0px;
     }
-  }
 
-  input:focus {
-    outline: none;
-    box-shadow: 0px 0px;
-  }
+    ::-webkit-input-placeholder {
+      font-size: 16px;
+      color: $color-placeholder;
+      opacity: 0.7;
+      text-align: left;
+      font-weight: 400;
+      line-height: 24px;
+    }
 
-  ::-webkit-input-placeholder {
-    font-size: 16px;
-    color: #212529;
-    opacity: 0.7;
-    text-align: left;
-    font-weight: 500;
-    line-height: 60px;
-  }
+    :-ms-input-placeholder {
+      font-size: 16px;
+      color: $color-placeholder;
+      opacity: 0.7;
+      text-align: left;
+      font-weight: 400;
+      line-height: 24px;
+    }
 
-  :-ms-input-placeholder {
-    font-size: 16px;
-    color: #212529;
-    opacity: 0.7;
-    text-align: left;
-    font-weight: 500;
-    line-height: 60px;
-  }
+    ::placeholder {
+      font-size: 16px;
+      color: $color-placeholder;
+      opacity: 0.7;
+      text-align: left;
+      font-weight: 400;
+      line-height: 24px;
+    }
 
-  ::placeholder {
-    font-size: 16px;
-    color: #212529;
-    opacity: 0.7;
-    text-align: left;
-    font-weight: 500;
-    line-height: 60px;
-  }
+    ::-webkit-input-placeholder { line-height: normal; }
 
-  ::-webkit-input-placeholder { line-height: normal; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #ffffff;
+      min-width: 198px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.16);
+      text-align: left;
+      z-index: 2;
+      color: $color-text;
+      font-size: 16px;
+      font-weight: 400;
+      border-radius: 10px;
+      left: 0;
+      right: 0;
+      margin-top: 8px;
+      overflow:hidden;
+      max-height: 420px;
+      
+      .firstSelect {
+        opacity: 0.7;
+      }
 
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ffffff;
-    min-width: 198px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.16);
-    text-align: left;
-    z-index: 2;
-    color: #0A1629;
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: 10px;
-    left: 0;
-    right: 0;
-    margin-top: 8px;
-    overflow:hidden;
-    max-height: 420px;
-    
-    .firstSelect {
+      .dropdown-list {
+        padding: 12px 16px 10px 16px;
+        min-height: 44px;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .line {
+        border-bottom: 1px solid #D8D8D8;
+        height: 0px !important;
+        opacity: 1 !important;
+        margin: 0px !important;
+        padding: 0px !important;
+      }
+    }
+
+    .form-input:disabled, .form-input[readonly], .disabled {
+      background-color: $color-disabled;
       opacity: 0.7;
     }
-
-    .dropdown-list {
-      padding-left: 22px;
-      padding-right: 22px;
-      display: flex;
-      align-items: center;
-      min-height: 45px;
-      width: 100%;
-      cursor: pointer;
-    }
-
-    .line {
-      border-bottom: 1px solid #D8D8D8;
-      height: 0px !important;
-      opacity: 1 !important;
-      margin: 0px !important;
-      padding: 0px !important;
-    }
   }
-
-  .form-input:disabled, .form-input[readonly], .disabled {
-    background-color: #ececec;
-    opacity: 0.7;
-  }
-}
 </style>

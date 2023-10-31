@@ -9,13 +9,13 @@
                   class=""
                   style=""
                   type="text"
-                  :disabled="input11"
+                  :disabled="true"
                   @keyup="keyup"
                   @keypress="keypress"
                   @keydown="keydown"
                   @focusin="focusin"
                   @focusout="focusout"
-                  placeholder="Text" />
+                  placeholder="ระบุอายุ" />
     </div>
     <div class="group-input">
       <div class="name">Search Value: {{input12}}</div>
@@ -32,7 +32,7 @@
                   @focusin="focusin"
                   @focusout="focusout"
                   @searchClick="search"
-                  placeholder="Text" />
+                  placeholder="ระบุอายุ" />
     </div>
     <div class="group-input">
       <div class="name">Select Value: {{input2}}</div>
@@ -44,7 +44,7 @@
                   :firstSelect="firstSelect"
                   @change="change"
                   :optionSelect="optionSelect"
-                  placeholder="Select" />
+                  placeholder="เลือกคำนำหน้าชื่อ" />
     </div>
     <div class="group-input">
       <div class="name">Auto complete Value: {{input3}}</div>
@@ -62,7 +62,7 @@
                         @keydown="keydown"
                         @focusin="focusin"
                         @focusout="focusout"
-                        placeholder="Auto Complete" />
+                        placeholder="เลือกคำนำหน้าชื่อ" />
     </div>
     <div class="group-input">
       <div class="name">Text Area Value: {{input4}}</div>
@@ -70,14 +70,14 @@
                     name="input4"
                     class=""
                     style=""
-                    rows="5"
+                    rows="4"
                     :disabled="input11"
                     @keyup="keyup"
                     @keypress="keypress"
                     @keydown="keydown"
                     @focusin="focusin"
                     @focusout="focusout"
-                    placeholder="Text Area"  />
+                    placeholder="เลือกคำนำหน้าชื่อ"  />
     </div>
     <div class="group-input">
       <div class="name">Checkbox Value: {{input5}}</div>
@@ -118,7 +118,7 @@
                         :minDate="input8"
                         @change="change"
                         :disabled="input11"
-                        placeholder="date start" />
+                        placeholder="เลือกคำนำหน้าชื่อ" />
 
         <cpn-datepicker v-model="input8"
                         name="input8"

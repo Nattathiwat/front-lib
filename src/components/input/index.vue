@@ -79,101 +79,109 @@ export default {
 </script>
 
 <style lang="scss">
-.component-input {
-  position: relative;
-  width: 100%;
+  $color-disabled: #F2F4F7;
+  $color-text: #101828;
+  $color-placeholder: #98A2B3;
+  $color-border: #E4E7EC;
+  $color-background: #ffffff;
 
-  .d-flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .component-input {
+    position: relative;
     width: 100%;
-  }
 
-  .form-control {
-    color: #212529 ;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    width: 100%;
-    height: 45px;
-    padding: 0 16px;
-  }
+    .d-flex {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
 
-  .icon-eye {
-    position: absolute;
-    right: 15px;
-    color: $color-primary;
-    font-size: 22px;
-  }
+    .form-control {
+      font-size: 16px;
+      color: $color-text;
+      border: 1px solid $color-border;
+      border-radius: 8px;
+      background-color: $color-background;
+      width: 100%;
+      height: 44px;
+      padding: 11px 16px 10px;
+    }
 
-  .button-search {
-    background-color: #1a456b;
-    font-size: 18px;
-    font-weight: 500;
-    color: #ffffff;
-    min-width: 118px;
-    max-width: 118px;
-    height: 45px;
-    border: 0;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: -5px;
-  }
+    .icon-eye {
+      position: absolute;
+      right: 15px;
+      color: $color-primary;
+      font-size: 22px;
+    }
 
-  .icon-search {
-    width: 23px;
-    height: 23px;
-    margin-right: 15px;
-  }
+    .button-search {
+      background-color: #1a456b;
+      font-size: 18px;
+      font-weight: 500;
+      color: #ffffff;
+      min-width: 118px;
+      max-width: 118px;
+      height: 44px;
+      border: 0;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: -5px;
+    }
 
-  .form-control:disabled, .form-control[readonly] {
-    background-color: #ececec;
-    opacity: 0.7;
-  }
-  
-  .button-search:disabled {
-    opacity: 0.7;
-  }
+    .icon-search {
+      width: 23px;
+      height: 23px;
+      margin-right: 15px;
+    }
 
-  .form-control:focus {
-    outline: none;
-    box-shadow: 0px 0px;
-  }
+    .form-control:disabled, .form-control[readonly] {
+      background-color: $color-disabled;
+      opacity: 0.7;
+    }
+    
+    .button-search:disabled {
+      opacity: 0.7;
+    }
 
-  ::-webkit-input-placeholder {
-    font-size: 16px;
-    color: #212529;
-    opacity: 0.7;
-    text-align: left;
-    font-weight: 500;
-    line-height: 60px;
-  }
+    .form-control:focus {
+      outline: none;
+      box-shadow: 0px 0px;
+    }
 
-  :-ms-input-placeholder {
-    font-size: 16px;
-    color: #212529;
-    opacity: 0.7;
-    text-align: left;
-    font-weight: 500;
-    line-height: 60px;
-  }
+    ::-webkit-input-placeholder {
+      font-size: 16px;
+      color: $color-placeholder;
+      opacity: 0.7;
+      text-align: left;
+      font-weight: 400;
+      line-height: 24px;
+    }
 
-  ::placeholder {
-    font-size: 16px;
-    color: #212529;
-    opacity: 0.7;
-    text-align: left;
-    font-weight: 500;
-    line-height: 60px;
-  }
+    :-ms-input-placeholder {
+      font-size: 16px;
+      color: $color-placeholder;
+      opacity: 0.7;
+      text-align: left;
+      font-weight: 400;
+      line-height: 24px;
+    }
 
-  ::-webkit-input-placeholder { line-height: normal; }
-  
-  input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    ::placeholder {
+      font-size: 16px;
+      color: $color-placeholder;
+      opacity: 0.7;
+      text-align: left;
+      font-weight: 400;
+      line-height: 24px;
+    }
+
+    ::-webkit-input-placeholder { line-height: normal; }
+    
+    input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px $color-background inset;
+    }
   }
-}
 </style>
