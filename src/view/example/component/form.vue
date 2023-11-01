@@ -161,8 +161,16 @@
     <div class="group-input">
       <div class="name">Input Tag Value: {{input13}}</div>
       <cpn-input-tags v-model="input13"
-                      name="tag"
+                      name="input-tag"
                       :flagSearch="true"
+                      :optionSelect="optionSelect13"
+                      @keyup="inputTag"
+                      :disabled="input11" />
+    </div>
+    <div class="group-input">
+      <div class="name">Select Tag Value: {{input14}}</div>
+      <cpn-select-tags v-model="input14"
+                      name="select-tag"
                       :optionSelect="optionSelect13"
                       @keyup="inputTag"
                       :disabled="input11" />
@@ -190,6 +198,7 @@ export default {
       input11: false,
       input12: '',
       input13: [],
+      input14: [],
       optionSelect13: [{ name: 'select1', value: '1' },{ name: 'select2', value: '2' },{ name: 'select3', value: '3' }],
     }
   },

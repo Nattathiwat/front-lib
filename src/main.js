@@ -63,6 +63,9 @@ import toggleSwitch from "@/components/toggleSwitch/index.vue";
 //inputTags
 import inputTags from "@/components/inputTags/index.vue";
 
+//selectTags
+import selectTags from "@/components/selectTags/index.vue";
+
 //example
 import example from "@/view/example/index.vue";
 
@@ -102,6 +105,7 @@ app.component('cpnDatepickerRange', dateRange); //dateRange
 app.component('cpnTime', time); //time
 app.component('cpnToggleSwitch', toggleSwitch); //toggleSwitch
 app.component('cpnInputTags', inputTags); //inputTags
+app.component('cpnSelectTags', selectTags); //selectTags
 app.component('cpnExample', example); //example
 
 app.use(router) //router
