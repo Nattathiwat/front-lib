@@ -64,6 +64,15 @@
               <span v-show="breadcrumbs.length>0 && index!=(breadcrumbs.length-1)" class="none-pointer space">/</span>
             </div>
           </div>
+          <div class="breadcrumb2">
+            <div class="group-text">
+              <div class="text" @click="$router.push({name: 'home'})">หน้าหลัก</div>
+            </div>
+            <div v-for="(item, index) in breadcrumbs2" :key="index" class="group-text">
+              <img src="@/assets/icon/breadcrumb/chevron.svg" alt="chevron" class="chevron" v-show="item.label">
+              <div class="text" :class="index == (breadcrumbs2.length-1) ? 'active': ''" @click="$router.push({...item})">{{item.label}}</div>
+            </div>
+          </div>
         </div>
         <div class="header-index-right">
           <div class="group-user">
@@ -99,6 +108,20 @@ export default {
       },
       iconAngle: {
         example: false
+      },
+      labels: {
+        dashboard: 'แดชบอร์ด',
+        chart: 'chart',
+        permission: 'permission',
+        user: 'user',
+        report: 'report',
+        setting: 'setting',
+        example: 'ตัวอย่าง',
+        exampleDashboard: 'แดชบอร์ด',
+        exampleForm: 'ฟอร์ม',
+        exampleValidate: 'แจ้งเตือน',
+        exampleOther: 'อื่นๆ',
+        exampleTable: 'ตาราง'
       }
     }
   },
@@ -106,6 +129,26 @@ export default {
     breadcrumbs() {
       return assetsUtils.breadcrumbs(this.$route)
     },
+    breadcrumbs2() {
+      let data = []
+      const result = this.$route.matched.reduce((allItem, item) => {
+        const dup = allItem.find(item2 => item2.path === item.path);
+        if (dup) {
+          return allItem;
+        }
+        return allItem.concat(item);
+      }, [])
+      result.filter(item => {
+        data.push({
+          label: this.labels[item.name],
+          ...item
+        })
+      })
+      if (result.length > 0) {
+        data[result.length-1].query = this.$route.query
+      }
+      return data
+    }
   },
   methods: {
     enter(element) {
@@ -216,6 +259,38 @@ export default {
             font-size: 18px;
             font-weight: bold;
             color: #0f3a64;
+          }
+        }
+
+        .breadcrumb2 {
+          display: flex;
+          // padding: 4px 0px;
+          // height: 32px;
+          // margin-bottom: 32px;
+          margin-left: 30px;
+
+          .group-text {
+            display: flex;
+
+            .chevron {
+              width: 24px;
+              height: 24px;
+              margin: -1px 4px 0px;
+            }
+
+            .text {
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 24px;
+              text-align: left;
+              color: #0039B5;
+              cursor: pointer;
+
+              &.active {
+                font-weight: 600;
+                color: #475467;
+              }
+            }
           }
         }
       }
