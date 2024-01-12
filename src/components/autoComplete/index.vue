@@ -1,129 +1,178 @@
 <template>
   <div class="component-auto-complete">
     <div class="component-input" ref="dropdownAutoComplete">
-      <Field  :class="[this.class, 'form-control']"
-              :style="this.style"
-              v-model="value"
-              :name="name"
-              autocomplete="off"
-              v-on:keyup="onKeyup($event.target.value)"
-              :validateOnBlur="true"
-              :validateOnChange="true"
-              :validateOnInput="true"
-              :placeholder="placeholder"
-              :disabled="disabled"
-              :maxlength="maxlength"
-              :rules="rules"
-              :type="type" />
-      <div @click="disabled ? '' : toggleDropdown()" :class="[disabled? 'disabled' : 'pointer']">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 10L12 15L17 10" stroke="#667085" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <Field
+        :class="[this.class, 'form-control']"
+        :style="this.style"
+        v-model="value"
+        :name="name"
+        autocomplete="off"
+        v-on:keyup="onKeyup($event.target.value)"
+        :validateOnBlur="true"
+        :validateOnChange="true"
+        :validateOnInput="true"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :maxlength="maxlength"
+        :rules="rules"
+        :type="type"
+      />
+      <div
+        @click="disabled ? '' : toggleDropdown()"
+        :class="[disabled ? 'disabled' : 'pointer']"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7 10L12 15L17 10"
+            stroke="#667085"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </div>
       <ErrorMessage :name="name" v-slot="{ message }">
-        <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
+        <p class="message-error">
+          {{
+            this?.errorMessage || (message ? message : this.defaultMessageError)
+          }}
+        </p>
       </ErrorMessage>
-      <div class="dropdown-content" :style="dropdown ? 'display: block; overflow: auto;' : 'display: none;'">
+      <div
+        class="dropdown-content"
+        :style="dropdown ? 'display: block; overflow: auto;' : 'display: none;'"
+      >
         <div>
-          <div class="dropdown-list firstSelect" v-show="firstSelect?.show" @click="select({value: '', name: ''})">{{firstSelect?.name}}</div>
+          <div
+            class="dropdown-list firstSelect"
+            v-show="firstSelect?.show"
+            @click="select({ value: '', name: '' })"
+          >
+            {{ firstSelect?.name }}
+          </div>
         </div>
-        <div v-for="(item, index)  in optionSelect" :key="index">
+        <div v-for="(item, index) in optionSelect" :key="index">
           <div class="line" v-show="index != 0 || firstSelect?.show"></div>
-          <div class="dropdown-list" @click="select(item)">{{item.name}}</div>
+          <div class="dropdown-list" @click="select(item)">{{ item.name }}</div>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
 export default {
-  name: 'component-auto-complete',
+  name: "component-auto-complete",
   data() {
     return {
       dropdown: false,
       value: this.modelValue,
-      oldValue: ''
-    }
+      oldValue: "",
+    };
   },
-  props: ['name', 'placeholder', 'modelValue', 'type', 'class', 'style', 'disabled', 'maxlength', 'rules', 'optionSelect', 'iconN', 'firstSelect', 'errorMessage'],
+  props: [
+    "name",
+    "placeholder",
+    "modelValue",
+    "type",
+    "class",
+    "style",
+    "disabled",
+    "maxlength",
+    "rules",
+    "optionSelect",
+    "iconN",
+    "firstSelect",
+    "errorMessage",
+  ],
   methods: {
     onKeyup(data) {
-      this.$emit('keyupData', data)
-      this.dropdown = true
+      this.$emit("keyupData", data);
+      this.dropdown = true;
       if (!data) {
-        this.dropdown = false
-        this.$emit('update:modelValue', '')
-        this.$emit('change', '')
+        this.dropdown = false;
+        this.$emit("update:modelValue", "");
+        this.$emit("changeValue", "");
       }
     },
     toggleDropdown() {
-      this.dropdown = !this.dropdown
+      this.dropdown = !this.dropdown;
     },
-    focusoutBtn (e) {
+    focusoutBtn(e) {
       if (this.$refs.dropdownAutoComplete) {
-        let target = e.target
-        if ((this.$refs.dropdownAutoComplete !== target) && !this.$refs.dropdownAutoComplete.contains(target)) {
+        let target = e.target;
+        if (
+          this.$refs.dropdownAutoComplete !== target &&
+          !this.$refs.dropdownAutoComplete.contains(target)
+        ) {
           if (this.dropdown) {
-            let check = true
-            this.optionSelect.filter(row => {
+            let check = true;
+            this.optionSelect.filter((row) => {
               if (row.name == this.value && this.value) {
-                check = false
-                this.$emit('update:modelValue', row.value)
-                this.change(row.value)
+                check = false;
+                this.$emit("update:modelValue", row.value);
+                this.change(row.value);
               }
-            })
+            });
             if (check) {
-              this.$emit('update:modelValue', '')
-              this.change()
-              this.value = ''
-              this.$emit('keyupData', '')
+              this.$emit("update:modelValue", "");
+              this.change();
+              this.value = "";
+              this.$emit("keyupData", "");
             }
           }
-          this.dropdown = false
+          this.dropdown = false;
         }
       }
     },
     select(data) {
-      this.$emit('update:modelValue', data.value)
-      this.change(data.value)
-    
-      this.dropdown = false
+      this.$emit("update:modelValue", data.value);
+      this.change(data.value);
+
+      this.dropdown = false;
     },
     change(data) {
       if (data != this.oldValue) {
-        this.$emit('change', data)
+        this.$emit("changeValue", data);
       } else {
-        this.value = this.optionSelect.filter(row=>row.value == data)[0]?.name || ''
+        this.value =
+          this.optionSelect.filter((row) => row.value == data)[0]?.name || "";
       }
-      this.oldValue = data
-    }
+      this.oldValue = data;
+    },
   },
-  mounted () {
-    document.addEventListener('click', this.focusoutBtn)
+  mounted() {
+    document.addEventListener("click", this.focusoutBtn);
     if (this.modelValue) {
-      this.$emit('update:modelValue', this.modelValue.toString())
+      this.$emit("update:modelValue", this.modelValue.toString());
     }
   },
-  beforeUnmount () {
-    document.removeEventListener('click',this.focusoutBtn)
+  beforeUnmount() {
+    document.removeEventListener("click", this.focusoutBtn);
   },
   watch: {
-    'modelValue'() {
-      this.value = this.optionSelect.filter(row=>row.value == this.modelValue)[0]?.name || ''
-      this.oldValue = this.modelValue
-    }
+    modelValue() {
+      this.value =
+        this.optionSelect.filter((row) => row.value == this.modelValue)[0]
+          ?.name || "";
+      this.oldValue = this.modelValue;
+    },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
-  $color-disabled: #F2F4F7;
-  $color-text: #101828;
-  $color-placeholder: #98A2B3;
-  $color-border: #E4E7EC;
-  $color-background: #ffffff;
+$color-disabled: #f2f4f7;
+$color-text: #101828;
+$color-placeholder: #98a2b3;
+$color-border: #e4e7ec;
+$color-background: #ffffff;
 
 .component-auto-complete {
   width: 100%;
@@ -132,7 +181,6 @@ export default {
     position: relative;
     width: 100%;
 
-  
     .form-control {
       font-size: 16px;
       color: $color-text;
@@ -144,7 +192,8 @@ export default {
       padding: 11px 16px 10px;
     }
 
-    .form-control:disabled, .form-control[readonly] {
+    .form-control:disabled,
+    .form-control[readonly] {
       background-color: $color-disabled;
       opacity: 0.7;
     }
@@ -181,9 +230,12 @@ export default {
       line-height: 24px;
     }
 
-    ::-webkit-input-placeholder { line-height: normal; }
+    ::-webkit-input-placeholder {
+      line-height: normal;
+    }
 
-    .pointer, .disabled {
+    .pointer,
+    .disabled {
       width: 24px;
       height: 24px;
       position: absolute;
@@ -205,10 +257,10 @@ export default {
       border-radius: 8px;
       left: 0;
       right: 0;
-      margin-top: 8px;
-      overflow:hidden;
+      top: 50px;
+      overflow: hidden;
       max-height: 420px;
-      
+
       .firstSelect {
         opacity: 0.7;
       }
@@ -221,7 +273,7 @@ export default {
       }
 
       .line {
-        border-bottom: 1px solid #D8D8D8;
+        border-bottom: 1px solid #d8d8d8;
         height: 0px !important;
         opacity: 1 !important;
         margin: 0px !important;

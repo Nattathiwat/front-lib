@@ -1,11 +1,13 @@
 <template>
   <div :class="[this.class, 'component-switch']" :style="this.style">
     <label class="switch">
-      <input  v-model="value"
-              @change="change()"
-              :name="name"
-              :disabled="disabled"
-              type="checkbox">
+      <input
+        v-model="value"
+        @change="change()"
+        :name="name"
+        :disabled="disabled"
+        type="checkbox"
+      />
       <span class="slider round"></span>
     </label>
   </div>
@@ -13,29 +15,30 @@
 
 <script>
 export default {
-  name: 'component-switch',
+  name: "component-switch",
   data() {
     return {
-      value: this.modelValue
-    }
+      value: this.modelValue,
+    };
   },
-  props: ['name', 'modelValue', 'disabled', 'class', 'style'],
+  props: ["name", "modelValue", "disabled", "class", "style"],
   methods: {
     change() {
-      this.$emit('update:modelValue', this.value)
-    }
+      this.$emit("update:modelValue", this.value);
+      this.$emit("changeValue", this.value);
+    },
   },
-  mounted () {
+  mounted() {
     if (this.modelValue) {
-      this.$emit('update:modelValue', this.modelValue)
+      this.$emit("update:modelValue", this.modelValue);
     }
   },
   watch: {
-    'modelValue'() {
-      this.value = this.modelValue
-    }
+    modelValue() {
+      this.value = this.modelValue;
+    },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
@@ -49,7 +52,7 @@ export default {
     height: 39px;
   }
 
-  .switch input { 
+  .switch input {
     opacity: 0;
     width: 0;
     height: 0;
@@ -62,8 +65,8 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
     background-color: #ffffff;
     border: 1px solid #ced4da;
   }
@@ -76,14 +79,14 @@ export default {
     left: 4px;
     bottom: 3px;
     background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
     border: 1px solid #ced4da;
   }
 
   input:checked + .slider {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background-color: #3b85de;
+    border-color: #3b85de;
   }
 
   input:checked + .slider:before {
@@ -114,9 +117,10 @@ export default {
     opacity: 0.7;
     cursor: default;
   }
-  input:checked, input:disabled + .slider {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+  input:checked,
+  input:disabled + .slider {
+    background-color: #3b85de;
+    border-color: #3b85de;
   }
 }
 </style>

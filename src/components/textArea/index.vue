@@ -1,65 +1,83 @@
 <template>
   <div class="component-text-area">
-    <Field  v-model="value"
-            as="textarea"
-            autocomplete="off"
-            :style="this.style"
-            :class="[this.class, 'form-control']"
-            :value="modelValue"
-            @input="$emit('update:modelValue', $event.target.value)"
-            :name="name"
-            :disabled="disabled"
-            :placeholder="placeholder"
-            :rows="rows"
-            @keydown="handleKeydown"
-            :rules="rules"
-            :validateOnBlur="true"
-            :validateOnChange="true"
-            :validateOnInput="true"
-            ref="textArea"
-            />
+    <Field
+      v-model="value"
+      as="textarea"
+      autocomplete="off"
+      :style="this.style"
+      :class="[this.class, 'form-control']"
+      :value="modelValue"
+      @input="$emit('update:modelValue', $event.target.value)"
+      :name="name"
+      :disabled="disabled"
+      :placeholder="placeholder"
+      :rows="rows"
+      @keydown="handleKeydown"
+      :rules="rules"
+      :validateOnBlur="true"
+      :validateOnChange="true"
+      :validateOnInput="true"
+      @keyup.enter="enter(value)"
+      ref="textArea"
+    />
     <ErrorMessage :name="name" v-slot="{ message }">
-      <p class="message-error">{{this?.errorMessage || (message ? message : this.defaultMessageError)}}</p>
+      <p class="message-error">
+        {{
+          this?.errorMessage || (message ? message : this.defaultMessageError)
+        }}
+      </p>
     </ErrorMessage>
   </div>
-
 </template>
 
 <script>
 export default {
-  name: 'component-text-area',
+  name: "component-text-area",
   data() {
     return {
-      value: this.modelValue
-    }
+      value: this.modelValue,
+    };
   },
-  props: ['name', 'placeholder', 'modelValue', 'class', 'style', 'disabled', 'rules', 'rows', 'errorMessage'],
+  props: [
+    "name",
+    "placeholder",
+    "modelValue",
+    "class",
+    "style",
+    "disabled",
+    "rules",
+    "rows",
+    "errorMessage",
+  ],
   methods: {
+    enter(data) {
+      this.$emit("enterValue", data);
+    },
     handleKeydown(data) {
       let area = data.target;
       if (area.value) {
-        setTimeout(function(){
+        setTimeout(function () {
           // area.style.height = 'auto';
           // area.style.padding = '9px 16px 8px';
           // area.style.height = area.scrollHeight + 'px';
-        },0);
+        }, 0);
       }
-    }
+    },
   },
   watch: {
-    'modelValue'() {
-      this.value = this.modelValue
-    }
-  }
-}
+    modelValue() {
+      this.value = this.modelValue;
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
-  $color-disabled: #F2F4F7;
-  $color-text: #101828;
-  $color-placeholder: #98A2B3;
-  $color-border: #E4E7EC;
-  $color-background: #ffffff;
+$color-disabled: #f2f4f7;
+$color-text: #101828;
+$color-placeholder: #98a2b3;
+$color-border: #e4e7ec;
+$color-background: #ffffff;
 .component-text-area {
   .form-control {
     // resize: vertical;
@@ -75,7 +93,8 @@ export default {
     padding: 9px 16px 8px;
   }
 
-  .form-control:disabled, .form-control[readonly] {
+  .form-control:disabled,
+  .form-control[readonly] {
     background-color: $color-disabled;
     opacity: 0.7;
   }
@@ -112,6 +131,8 @@ export default {
     line-height: 24px;
   }
 
-  ::-webkit-input-placeholder { line-height: normal; }
+  ::-webkit-input-placeholder {
+    line-height: normal;
+  }
 }
 </style>

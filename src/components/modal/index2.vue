@@ -1,10 +1,10 @@
 <template>
-  <div class="component-modal" v-show="modalData.showModal">
+  <div class="component-modal2" v-show="modalData.showModal">
     <div class="modal-class">
       <div class="modal-center">
         <div class="modal-size" ref="modalDataref">
           <div class="modal-title">
-            <div class="title-size">title</div> 
+            <div class="title-size">title</div>
             <i class="bi bi-x-lg icon-close" @click="closeModal()"></i>
           </div>
           <div class="line"></div>
@@ -12,9 +12,7 @@
             <div class="message">message</div>
           </div>
           <div class="line"></div>
-          <div class="group-footer">
-            footer
-          </div>
+          <div class="group-footer">footer</div>
         </div>
       </div>
     </div>
@@ -23,28 +21,28 @@
 
 <script>
 export default {
-  name: 'component-modal2',
+  name: "component-modal2",
   data() {
-    return {}
+    return {};
   },
-  props: ['modalData'],
+  props: ["modalData"],
   methods: {
     closeModal() {
-      this.modalData.showModal = false
-    }
+      this.modalData.showModal = false;
+    },
   },
   watch: {
-    'modalData.showModal' () {
-      document.body.style.overflow = this.modalData.showModal ? 'hidden' : ''
-    }
-  }
-}
+    "modalData.showModal"() {
+      document.body.style.overflow = this.modalData.showModal ? "hidden" : "";
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
-.component-modal {
+.component-modal2 {
   .modal-class {
-    position: fixed;
+    position: absolute;
     overflow-y: auto;
     top: 0;
     right: 0;
@@ -58,7 +56,6 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-  
 
       .modal-size {
         width: 100%;
@@ -70,8 +67,8 @@ export default {
 
         .line {
           width: 100%;
-          height: 2px;
-          background-color: #0A1629;
+          height: 1px;
+          background-color: #0a1629;
         }
 
         .modal-title {
@@ -85,7 +82,7 @@ export default {
           .title-size {
             font-size: 24px;
             font-weight: 700;
-            color: #0A1629;
+            color: #0a1629;
             margin-top: 5px;
           }
 
@@ -110,6 +107,7 @@ export default {
         }
 
         .group-footer {
+          font-size: 22px;
           margin-top: 10px;
           margin-bottom: 35px;
           text-align: center;

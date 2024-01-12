@@ -1,26 +1,34 @@
 <template>
-  <div class="component-pagination" v-show="total>0">
-    <div class="view-page">
-			แสดงผล
-			<select name="cars" v-model="pageSize"  class="page-size" @change="pageSizeHandleBlur(pageSize)">
-				<option v-for="(item, index) in totalArr" :key="index" :value="item">{{item}}</option>
-			</select>
-			จากทั้งหมด
-			{{total}}
-		</div>
-    <Paginate
-      v-model="pageActive"
-      :page-count="total"
-      :page-range="3"
-      :margin-pages="1"
-      :click-handler="clickCallback"
-      :prev-text="'Prev'"
-      :next-text="'Next'"
-      :container-class="'pagination'"
-      :page-class="'page-item'"
-    >
-    </Paginate>
-
+  <div class="component-pagination row" v-show="total > 0">
+    <div class="view-page col-md-6">
+      แสดงผล
+      <select
+        name="cars"
+        v-model="pageSize"
+        class="page-size"
+        @change="pageSizeHandleBlur(pageSize)"
+      >
+        <option v-for="(item, index) in totalArr" :key="index" :value="item">
+          {{ item }}
+        </option>
+      </select>
+      จากทั้งหมด
+      {{ total }}
+    </div>
+    <div class="col-md-6 group-pagination">
+      <Paginate
+        v-model="pageActive"
+        :page-count="pageCount"
+        :page-range="3"
+        :margin-pages="1"
+        :click-handler="clickHandler"
+        :prev-text="'ก่อนหน้า'"
+        :next-text="'ถัดไป'"
+        :container-class="'pagination'"
+        :page-class="'page-item'"
+      >
+      </Paginate>
+    </div>
   </div>
 </template>
 
@@ -28,195 +36,172 @@
 import Paginate from "vuejs-paginate-next";
 
 export default {
-  name: 'component-pagination',
+  name: "component-pagination",
   data() {
     return {
       pageActive: this.page,
       pageSize: this.perPage,
-			totalArr: [],
+      totalArr: [],
       pageSizeTotal: 10,
-    }
+    };
   },
   components: {
-    Paginate
+    Paginate,
   },
-  props: ['page', 'total', 'perPage', 'lastPage'],
+  props: ["page", "total", "perPage"],
+  computed: {
+    pageCount() {
+      return this.total / this.pageSize;
+    },
+  },
   methods: {
     pageSizeHandleBlur() {
-			let newData = {
-				page: 1,
-				perPage: this.pageSize
-			}
-      this.$emit('pageChange', newData)
+      let newData = {
+        page: 1,
+        perPage: this.pageSize,
+      };
+      this.pageActive = 1;
+      this.$emit("pageChange", newData);
     },
-    clickCallback (pageNum) {
-			let newData = {
-				page: pageNum,
-				perPage: this.pageSize
-			}
-      this.$emit('pageChange', newData)
+    clickHandler(pageNum) {
+      let newData = {
+        page: pageNum,
+        perPage: this.pageSize,
+      };
+      this.$emit("pageChange", newData);
     },
     setPages() {
-      this.pageActive = this.page ? parseInt(this.page) : 1
-      this.pageSize = this.perPage ? parseInt(this.perPage) : 50
-      this.totalArr = []
-			if (this.total < this.pageSizeTotal) {
-				this.totalArr.push(this.pageSizeTotal)
-			} else {
-				for (let index = 1; index <= this.total; index++) {
-					if (index % this.pageSizeTotal == 0) {
-						this.totalArr.push(index)
-					}
-				}
-				if (this.total % this.pageSizeTotal != 0) {
-					this.totalArr.push((this.totalArr[this.totalArr.length - 1]) + this.pageSizeTotal)
-				}
-			}
-    }
+      this.pageActive = this.page ? parseInt(this.page) : 1;
+      this.pageSize = this.perPage ? parseInt(this.perPage) : 50;
+      this.totalArr = [];
+      if (this.total < this.pageSize) {
+        this.totalArr.push(this.pageSize);
+      } else {
+        for (let index = 1; index <= this.total; index++) {
+          if (index % this.pageSize == 0) {
+            this.totalArr.push(index);
+          }
+        }
+        if (this.total % this.pageSize != 0) {
+          this.totalArr.push(
+            this.totalArr[this.totalArr.length - 1] + this.pageSize
+          );
+        }
+      }
+    },
   },
-  mounted () {
-		this.setPages();
-	},
+  mounted() {
+    this.setPages();
+  },
   watch: {
-    'total'() {
-			this.setPages();
-		},
-		'perPage'() {
-			this.setPages();
-		},
-		'lastPage'() {
-			this.setPages();
-		},
-		'page'() {
-			this.setPages();
-		}
-  }
-}
+    total() {
+      this.setPages();
+    },
+    perPage() {
+      this.setPages();
+    },
+    page() {
+      this.setPages();
+    },
+  },
+};
 </script>
 
 <style lang="scss">
-  .component-pagination {
+.component-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // margin-top: 20px;
+
+  .view-page {
+    font-size: 16px;
+    font-weight: 500;
+    color: #3c4858;
+    margin-top: 20px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
+    white-space: nowrap;
 
-    .view-page {
-      font-size: 16px;
-      font-weight: 500;
+    .page-size {
+      max-width: 117px;
+      width: 100%;
+      height: 35px;
+      margin: 0 17px 0 13px;
+      padding-top: 2px;
+      padding-left: 12px;
+      border: solid 1px #c1cfe3;
+      border-radius: 8px;
+      background-color: #fff;
+      font-weight: 600;
       color: #3c4858;
+    }
 
-      .page-size {
-        width: 117px;
-        height: 35px;
-        margin: 0 17px 0 13px;
-        // padding: 11px 9px 11px 20px;
-        padding-left: 12px;
-        border: solid 1px #c1cfe3;
-        border-radius: 5px;
-        background-color: #fff;
+    .page-size:focus {
+      outline: none;
+      box-shadow: 0px 0px;
+    }
+  }
+
+  .group-pagination {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+  ul.pagination {
+    // margin-top: 20px;
+
+    li.page-item {
+      a.page-link {
+        cursor: pointer;
+        min-width: 41px;
+        height: 41px;
+        display: flex;
+        justify-content: center;
+        background: transparent;
+        padding: 0 12px;
         font-size: 16px;
-        font-weight: 600;
-        color: #3c4858;
+        font-weight: 400;
+        line-height: 41px;
+        color: #101828 !important;
+        align-items: center;
       }
 
-      .page-size:focus {
-        outline: none;
-        box-shadow: 0px 0px;
+      &.active > a.page-link {
+        cursor: pointer;
+        color: #ffffff !important;
+        border-color: #3b85de;
+        background-color: #3b85de;
+      }
+
+      a:focus {
+        box-shadow: none;
       }
     }
-
-    *, ::after, ::before {
-      box-sizing: border-box;
+    .page-item:first-child .page-link {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
     }
 
-    body {
-      font-family: Arial, sans-serif;
+    .page-item:last-child .page-link {
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
     }
 
-    #components-app {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      
-      > table {
-        border: 2px solid rgba(#444, 50%);
-        border-radius: 5px;
-        border-spacing: 0;
-        
-        > thead {
-            border-bottom: 1px solid rgba(#444, 50%);
-            > tr > th {
-                padding: 10px 12px;
-                margin-top: -4px;
-                
-                &:not(:last-child) {
-                    border-right: 1px solid #ddd;
-                }
-            }
-        }
-        
-        > tbody {
-            > tr {
-                &:nth-child(odd) {
-                    td {
-                        background-color: #ddd;
-                    }
-                }
-                
-                > td {
-                    padding: 6px 5px;
-                    
-                    &:not(last-child) {
-                        border-right: 1px solid #ddd;
-                    }
-                }
-            }
-        }
-      }
-    }
-
-    ul.pagination {
-      display: flex;
-      padding-left: 0;
-      list-style: none;
-      border-radius: .25rem;
-      justify-content: flex-end;
-      margin-top: 20px;
-
-      li.page-item {
-        padding: 0px;
-        margin: 0;
-
-        a.page-link {
-            cursor: pointer;
-            min-width: 41px;
-            height: 41px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            padding: 0 12px;
-            color: #15466e;
-        }
-            
-        &.active >
-        a.page-link {
-            color: #fff;
-            cursor: pointer;
-            border-color: #15466e;
-            background-color: #15466e;
-        }
-
-        a:focus {
-          box-shadow: none;
-        }
-      }
-      li.disabled {
-        a.page-link {
-          color: rgba(21, 70, 110, 0.53);
-        }
+    li.disabled {
+      a.page-link {
+        color: rgba(21, 70, 110, 0.53);
       }
     }
   }
+
+  @media only screen and (max-width: 767px) {
+    .view-page,
+    .group-pagination {
+      justify-content: center;
+    }
+  }
+}
 </style>

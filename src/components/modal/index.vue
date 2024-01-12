@@ -4,26 +4,45 @@
       <div class="modal-center">
         <div class="modal-size" ref="modalDataref">
           <div class="modal-title">
-            <div class="title-size">{{modalData.title}}</div> 
-            <i v-show="modalData.btnClose" class="bi bi-x-lg icon-close" @click="closeModal()"></i>
+            <div class="title-size">{{ modalData.title }}</div>
+            <i
+              v-show="modalData.btnClose"
+              class="bi bi-x-lg icon-close"
+              @click="closeModal()"
+            ></i>
           </div>
           <div class="modal-detail">
-            <div class="message">{{modalData.message}}</div>
+            <div class="message">{{ modalData.message }}</div>
           </div>
           <div class="group-footer">
-           <button v-show="modalData.btnCancel" type="button" @click="closeModal()" class="btn btn-danger">
+            <button
+              v-show="modalData.btnCancel"
+              type="button"
+              @click="closeModal()"
+              class="btn btn-danger"
+            >
               <div class="group-name">
                 <i class="bi bi-x-circle image-icon"></i>
                 <div class="name">ยกเลิก</div>
               </div>
             </button>
-            <button v-show="modalData.btnConfirm" type="button" @click="confirmModal()" class="btn btn-primary">
+            <button
+              v-show="modalData.btnConfirm"
+              type="button"
+              @click="confirmModal()"
+              class="btn btn-primary"
+            >
               <div class="group-name">
                 <i class="bi bi-question-circle image-icon"></i>
                 <div class="name">ยืนยัน</div>
               </div>
             </button>
-            <button v-show="modalData.btnSave" type="button" @click="confirmModal()" class="btn btn-success">
+            <button
+              v-show="modalData.btnSave"
+              type="button"
+              @click="confirmModal()"
+              class="btn btn-success"
+            >
               <div class="group-name">
                 <i class="bi bi-check-circle image-icon"></i>
                 <div class="name">บันทึก</div>
@@ -38,53 +57,56 @@
 
 <script>
 export default {
-  name: 'component-modal',
+  name: "component-modal",
   data() {
     return {
-      firstFlag: false
-    }
+      firstFlag: false,
+    };
   },
-  props: ['modalData'],
+  props: ["modalData"],
   methods: {
-    focusoutBtn (e) {
+    focusoutBtn(e) {
       if (this.modalData.showModal) {
         if (this.firstFlag) {
           if (this.$refs.modalDataref) {
-            let target = e.target
-            if ((this.$refs.modalDataref !== target) && !this.$refs.modalDataref.contains(target)) {
-              this.closeModal()
+            let target = e.target;
+            if (
+              this.$refs.modalDataref !== target &&
+              !this.$refs.modalDataref.contains(target)
+            ) {
+              this.closeModal();
             }
           }
         } else {
-          this.firstFlag = true
+          this.firstFlag = true;
         }
       }
     },
     closeModal() {
-      this.modalData.showModal = false
-      this.firstFlag = false
+      this.modalData.showModal = false;
+      this.firstFlag = false;
     },
     confirmModal() {
-      this.modalData.showModal = false
-      this.firstFlag = false
-      this.$emit('confirm-modal', this.modalData.status)
-    }
+      this.modalData.showModal = false;
+      this.firstFlag = false;
+      this.$emit("confirm-modal", this.modalData.status);
+    },
   },
   mounted() {
-    document.addEventListener('click', this.focusoutBtn)
+    document.addEventListener("click", this.focusoutBtn);
   },
   watch: {
-    'modalData.showModal' () {
-      document.body.style.overflow = this.modalData.showModal ? 'hidden' : ''
-    }
-  }
-}
+    "modalData.showModal"() {
+      document.body.style.overflow = this.modalData.showModal ? "hidden" : "";
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
 .component-modal {
   .modal-class {
-    position: fixed;
+    position: absolute;
     overflow-y: auto;
     top: 0;
     right: 0;
@@ -98,7 +120,6 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-  
 
       .modal-size {
         width: 100%;
@@ -119,7 +140,7 @@ export default {
           .title-size {
             font-size: 24px;
             font-weight: 700;
-            color: #0A1629;
+            color: #0a1629;
             margin-top: 5px;
           }
 
@@ -150,13 +171,14 @@ export default {
           display: flex;
           justify-content: space-between;
           padding: 0 30px;
-          
+
           button {
             margin: auto;
             width: 150px;
             height: 65px;
             border-radius: 10px;
             border: 0;
+            font-size: 10px;
           }
 
           .group-name {
