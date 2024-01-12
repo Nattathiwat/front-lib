@@ -29,7 +29,6 @@ export default {
 .example-templete {
   .main-detail {
     transition: padding 0.5s ease-in-out;
-    position: relative;
     padding: 20px;
     padding-left: 90px;
     flex: 1;

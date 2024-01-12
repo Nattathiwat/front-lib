@@ -10,10 +10,11 @@
       <input v-bind="field" v-show="false" />
     </Field>
     <div class="group-input-tags" :class="{ disabled: disabled }">
-      <div class="tags-box" v-for="(item, index) in data" :key="index">
+      <div class="tags-box none-pointer" v-for="(item, index) in data" :key="index">
         {{ item.name }}
         <i
-          class="bi bi-x-lg icon-close pointer"
+          class="bi bi-x-lg icon-close"
+          :class="[disabled ? 'none-pointer' : 'pointer']"
           @click="disabled ? '' : data.splice(index, 1)"
         ></i>
       </div>

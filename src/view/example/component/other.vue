@@ -3,30 +3,30 @@
     <div>
       <h2 class="name">Loading</h2>
       <!-- conponent loading -->
-      <button class="btn btn-primary mt-3" @click="show()">
+      <button class="btn btn-primary mt-3" @click="show1()">
         show loading 2s
       </button>
     </div>
     <div class="mt-5">
       <h2 class="name mt-5">sweetalert2</h2>
+      <button class="btn btn-primary mt-3 mb-2" @click="sweetalert1()">
+        show sweetalert
+      </button>
+      <br>
       <button class="btn btn-primary mt-3 mb-2" @click="sweetalert2()">
-        show sweetalert2
+        show error message
       </button>
       <br />
-      <a href="https://sweetalert2.github.io/" target="bank">sweetalert2</a>
+      <a href="https://sweetalert2.github.io/" target="bank">sweetalert</a>
     </div>
     <div class="mt-5">
       <h2 class="name mt-5">modal</h2>
-      <button class="btn btn-primary mt-3 mb-2" @click="show2()">
+      <button class="btn btn-primary mt-3 mb-2" @click="showModal()">
         show modal vue
       </button>
       <br />
-      <button class="btn btn-primary mt-3 mb-2" @click="show3()">
-        show modal2 vue
-      </button>
       <!-- conponent modal -->
-      <cpn-modal :modalData="modalData" />
-      <cpn-modal2 :modalData="modalData2" />
+      <cpn-modal :data="modalData" />
       <br />
       <!-- Modal bootstrap -->
       <button
@@ -89,48 +89,41 @@ export default {
   data() {
     return {
       modalData: {
-        showModal: false,
-        btnClose: true,
-        btnCancel: true,
-        btnConfirm: true,
-        btnSave: true,
-        title: "title",
-        message: "message",
-      },
-      modalData2: {
-        showModal: false,
+        show: false,
       },
     };
   },
   methods: {
-    show() {
+    show1() {
       this.showLoading(true);
       setTimeout(() => {
         this.showLoading(false);
       }, 2000);
     },
-    show2() {
-      this.modalData.showModal = true;
+    showModal() {
+      this.modalData.show = true;
     },
-    show3() {
-      this.modalData2.showModal = true;
-    },
-    sweetalert2() {
+    sweetalert1() {
       this.$swal({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
         icon: "warning",
-        confirmButtonColor: "#3b85de",
-        confirmButtonText: "Yes, delete it!",
+        showConfirmButton: true,
         showCancelButton: true,
-        cancelButtonColor: "#7066e0",
-        cancelButtonText: "No, cancel!",
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$swal("Deleted!", "Your file has been deleted.", "success");
+          this.$swal({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+            showDenyButton: true,
+          });
         }
-      });
+      })
     },
+    sweetalert2() {
+      this.errorMessage('ทดสอบผิดพลาด');
+    }
   },
 };
 </script>

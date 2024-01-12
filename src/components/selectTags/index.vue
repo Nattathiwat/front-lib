@@ -10,18 +10,18 @@
       <input v-bind="field" v-show="false" />
     </Field>
     <div
-      class="group-input-tags pointer"
+      class="group-input-tags"
       :class="{ disabled: disabled }"
       @click="disabled ? '' : (toggleDropdown(), $event.stopPropagation())"
     >
       <div class="placeholder" v-show="data.length == 0">{{ placeholder }}</div>
-      <div class="tags-box" v-for="(item, index) in data" :key="index">
+      <div class="tags-box none-pointer" v-for="(item, index) in data" :key="index">
         {{ item.name }}
         <i
-          class="bi bi-x-lg icon-close pointer"
+          class="bi bi-x-lg icon-close"
+          :class="[disabled ? 'none-pointer' : 'pointer']"
           @click="
-            disabled ? '' : $event.stopPropagation();
-            data.splice(index, 1);
+            disabled ? '' : ($event.stopPropagation(), data.splice(index, 1));
           "
         ></i>
       </div>

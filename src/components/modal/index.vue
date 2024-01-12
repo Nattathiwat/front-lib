@@ -1,52 +1,44 @@
 <template>
-  <div class="component-modal" v-show="modalData.showModal">
+  <div class="component-modal" v-show="data.show">
     <div class="modal-class">
       <div class="modal-center">
-        <div class="modal-size" ref="modalDataref">
+        <div class="modal-size" ref="insideModal">
           <div class="modal-title">
-            <div class="title-size">{{ modalData.title }}</div>
+            <div class="title-size">title</div>
             <i
-              v-show="modalData.btnClose"
               class="bi bi-x-lg icon-close"
               @click="closeModal()"
             ></i>
           </div>
+          <div class="line"></div>
           <div class="modal-detail">
-            <div class="message">{{ modalData.message }}</div>
+            <div class="message">message</div>
           </div>
+          <div class="line"></div>
           <div class="group-footer">
             <button
-              v-show="modalData.btnCancel"
               type="button"
               @click="closeModal()"
               class="btn btn-danger"
             >
-              <div class="group-name">
-                <i class="bi bi-x-circle image-icon"></i>
-                <div class="name">ยกเลิก</div>
-              </div>
+              <i class="bi bi-x-circle image-icon"></i>
+              ยกเลิก
             </button>
             <button
-              v-show="modalData.btnConfirm"
               type="button"
               @click="confirmModal()"
               class="btn btn-primary"
             >
-              <div class="group-name">
-                <i class="bi bi-question-circle image-icon"></i>
-                <div class="name">ยืนยัน</div>
-              </div>
+              <i class="bi bi-question-circle image-icon"></i>
+              ยืนยัน
             </button>
             <button
-              v-show="modalData.btnSave"
               type="button"
               @click="confirmModal()"
               class="btn btn-success"
             >
-              <div class="group-name">
-                <i class="bi bi-check-circle image-icon"></i>
-                <div class="name">บันทึก</div>
-              </div>
+              <i class="bi bi-check-circle image-icon"></i>
+              บันทึก
             </button>
           </div>
         </div>
@@ -63,16 +55,16 @@ export default {
       firstFlag: false,
     };
   },
-  props: ["modalData"],
+  props: ["data"],
   methods: {
     focusoutBtn(e) {
-      if (this.modalData.showModal) {
+      if (this.data.show) {
         if (this.firstFlag) {
-          if (this.$refs.modalDataref) {
+          if (this.$refs.insideModal) {
             let target = e.target;
             if (
-              this.$refs.modalDataref !== target &&
-              !this.$refs.modalDataref.contains(target)
+              this.$refs.insideModal !== target &&
+              !this.$refs.insideModal.contains(target)
             ) {
               this.closeModal();
             }
@@ -83,21 +75,21 @@ export default {
       }
     },
     closeModal() {
-      this.modalData.showModal = false;
+      this.data.show = false;
       this.firstFlag = false;
     },
     confirmModal() {
-      this.modalData.showModal = false;
+      this.data.show = false;
       this.firstFlag = false;
-      this.$emit("confirm-modal", this.modalData.status);
+      this.$emit("confirm-modal", this.data.status);
     },
   },
   mounted() {
     document.addEventListener("click", this.focusoutBtn);
   },
   watch: {
-    "modalData.showModal"() {
-      document.body.style.overflow = this.modalData.showModal ? "hidden" : "";
+    "data.show"() {
+      document.body.style.overflow = this.data.show ? "hidden" : "";
     },
   },
 };
@@ -132,71 +124,69 @@ export default {
         .modal-title {
           display: flex;
           justify-content: space-between;
-          padding-top: 30px;
-          margin-bottom: 24px;
+          padding-top: 20px;
+          margin-bottom: 12px;
           margin-right: 30px;
-          margin-left: 60px;
+          margin-left: 40px;
 
           .title-size {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: #0a1629;
             margin-top: 5px;
           }
 
           .icon-close {
-            font-size: 30px;
+            font-size: 20px;
             cursor: pointer;
           }
         }
-
+        .line {
+          width: 100%;
+          height: 1px;
+          background-color: #eaecf0;
+          margin-bottom: 5px;
+        }
         .modal-detail {
-          margin-right: 38px;
-          margin-left: 38px;
-          padding-top: 30px;
+          margin: 12px 38px 0px;
 
           .message {
             text-align: center;
             color: #333;
-            font-size: 22px;
+            font-size: 16px;
             font-weight: 500;
             margin-top: 30px;
           }
         }
 
         .group-footer {
-          margin-top: 63px;
-          margin-bottom: 35px;
+          margin-top: 20px;
+          margin-bottom: 20px;
           text-align: center;
           display: flex;
-          justify-content: space-between;
-          padding: 0 30px;
+          justify-content: center;
+          margin-right: 38px;
+          margin-left: 38px;
+          padding: 0 10px;
 
           button {
-            margin: auto;
-            width: 150px;
-            height: 65px;
-            border-radius: 10px;
-            border: 0;
-            font-size: 10px;
-          }
-
-          .group-name {
+            height: 44px;
+            width: 160px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.0509803922);
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0 5px;
             display: flex;
             align-items: center;
             justify-content: center;
+          }
 
-            .image-icon {
-              color: #ffffff;
-              font-size: 30px;
-              margin-right: 15px;
-            }
-
-            .name {
-              color: #ffffff;
-              font-size: 24px;
-              font-weight: 500;
-            }
+          .image-icon {
+            color: #ffffff;
+            font-size: 22px;
+            margin-right: 7px;
           }
         }
       }
