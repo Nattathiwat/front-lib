@@ -1,9 +1,9 @@
 <template>
-  <div :style="widthSize" class="main-footer row">
-    <div class="text col-sm">
+  <div :style="widthSize" class="main-footer">
+    <div class="text">
       Terms of Service | Copyright © 2022 Example. All Rights Reserved
     </div>
-    <div class="version col">Version {{ version }}</div>
+    <div class="version">Version {{ version }}</div>
   </div>
 </template>
 <script>
@@ -31,25 +31,24 @@ export default {
 <style lang="scss">
 .example-templete {
   .main-footer {
-    min-height: 50px;
-    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px 10px 90px;
+    padding: 14px 20px 14px 90px;
     box-shadow: 7.4px 9.5px 15px 15px rgb(137 148 169 / 14%);
     transition: padding 0.5s ease-in-out;
     color: #15466e;
     font-size: 14px;
     font-weight: 500;
-    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     .text {
       min-width: 263px;
+      width: 70%;
     }
     .version {
       white-space: nowrap;
-      max-width: 100px;
     }
   }
 }

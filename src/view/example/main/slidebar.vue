@@ -310,7 +310,7 @@ export default {
           this.$refs.mainSlidebar !== target &&
           !this.$refs.mainSlidebar.contains(target)
         ) {
-          if (this.mobile) {
+          if (this.mobile && this.hamburger) {
             this.$emit("hamburger");
           }
         }
