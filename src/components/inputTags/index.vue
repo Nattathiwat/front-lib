@@ -10,26 +10,28 @@
       <input v-bind="field" v-show="false" />
     </Field>
     <div class="group-input-tags" :class="{ disabled: disabled }">
-      <div class="tags-box none-pointer" v-for="(item, index) in data" :key="index">
-        {{ item.name }}
-        <i
-          class="bi bi-x-lg icon-close"
-          :class="[disabled ? 'none-pointer' : 'pointer']"
-          @click="disabled ? '' : data.splice(index, 1)"
-        ></i>
+      <div class="tags-box-detail">
+        <div class="tags-box none-pointer" v-for="(item, index) in data" :key="index">
+          {{ item.name }}
+          <i
+            class="bi bi-x-lg icon-close"
+            :class="[disabled ? 'none-pointer' : 'pointer']"
+            @click="disabled ? '' : data.splice(index, 1)"
+          ></i>
+        </div>
+        <input
+          v-model="value"
+          :style="this.style"
+          :class="['form-input', this.class]"
+          :name="name + 'InputTags'"
+          autocomplete="off"
+          :disabled="disabled"
+          :placeholder="dataLength ? '' : placeholder"
+          v-on:keyup="onKeyup($event.target.value)"
+          @keydown="onKeydown"
+          @focusout="handleFocusout"
+        />
       </div>
-      <input
-        v-model="value"
-        :style="this.style"
-        :class="['form-input', this.class]"
-        :name="name + 'InputTags'"
-        autocomplete="off"
-        :disabled="disabled"
-        :placeholder="dataLength ? '' : placeholder"
-        v-on:keyup="onKeyup($event.target.value)"
-        @keydown="onKeydown"
-        @focusout="handleFocusout"
-      />
     </div>
     <ErrorMessage :name="name" v-slot="{ message }">
       <p class="message-error">
@@ -209,36 +211,38 @@ $color-tag-box: #e4edff;
     scrollbar-width: none;
   }
   .group-input-tags {
-    display: flex;
-    // flex-wrap: wrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    height: 44px;
-    width: 100%;
     border: 1px solid $color-border;
     border-radius: 8px;
     background-color: $color-background;
-    position: relative;
-    align-items: center;
     padding: 0px 16px;
 
-    .tags-box {
-      background: $color-tag-box;
-      padding: 2px 12px 2px 16px;
-      border-radius: 999px;
+    .tags-box-detail {
       display: flex;
       align-items: center;
-      height: 26px;
-      margin-right: 8px;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 22px;
-      text-align: left;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      width: 100%;
+      height: 44px;
 
-      .icon-close {
-        margin-top: 2px;
-        margin-left: 5px;
+      .tags-box {
+        background: $color-tag-box;
+        padding: 2px 12px 2px 16px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        height: 26px;
+        margin-right: 8px;
         font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        text-align: left;
+        white-space: nowrap;
+
+        .icon-close {
+          margin-top: 2px;
+          margin-left: 5px;
+          font-size: 14px;
+        }
       }
     }
 

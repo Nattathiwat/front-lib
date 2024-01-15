@@ -266,7 +266,6 @@ $color-background: #ffffff;
     width: 20px;
     height: 20px;
     margin-right: 12px;
-    padding-left: 6px;
     background-color: white;
     cursor: pointer;
   }

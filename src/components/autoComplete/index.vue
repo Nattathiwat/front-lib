@@ -189,7 +189,7 @@ $color-background: #ffffff;
       background-color: $color-background;
       width: 100%;
       height: 44px;
-      padding: 11px 16px 10px;
+      padding: 11px 41px 10px 16px;
     }
 
     .form-control:disabled,
@@ -236,10 +236,8 @@ $color-background: #ffffff;
 
     .pointer,
     .disabled {
-      width: 24px;
-      height: 24px;
       position: absolute;
-      right: 16px;
+      right: 10px;
       top: 10px;
     }
 

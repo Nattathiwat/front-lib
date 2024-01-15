@@ -14,6 +14,7 @@
       :class="{ disabled: disabled }"
       @click="disabled ? '' : (toggleDropdown(), $event.stopPropagation())"
     >
+    <div class="tags-box-detail">
       <div class="placeholder" v-show="data.length == 0">{{ placeholder }}</div>
       <div class="tags-box none-pointer" v-for="(item, index) in data" :key="index">
         {{ item.name }}
@@ -25,6 +26,7 @@
           "
         ></i>
       </div>
+    </div>
       <div
         @click="disabled ? '' : toggleDropdown(), $event.stopPropagation()"
         class="chevron"
@@ -188,51 +190,46 @@ $color-tag-box: #e4edff;
     scrollbar-width: none;
   }
   .group-input-tags {
-    display: flex;
-    // flex-wrap: wrap;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    height: 44px;
-    width: 100%;
     border: 1px solid $color-border;
     border-radius: 8px;
     background-color: $color-background;
-    // position: relative;
-    align-items: center;
-    padding: 0px 32px 0px 16px;
+    padding: 0 41px 0 16px;
 
-    .tags-box {
-      background: $color-tag-box;
-      padding: 2px 12px 2px 16px;
-      border-radius: 999px;
+    .tags-box-detail {
       display: flex;
       align-items: center;
-      height: 26px;
-      margin-right: 8px;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 22px;
-      text-align: left;
-      white-space: nowrap;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      width: 100%;
+      height: 44px;
 
-      .icon-close {
-        margin-top: 2px;
-        margin-left: 5px;
+
+      .tags-box {
+        background: $color-tag-box;
+        padding: 2px 12px 2px 16px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        height: 26px;
+        margin-right: 8px;
         font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        text-align: left;
+        white-space: nowrap;
+
+        .icon-close {
+          margin-top: 2px;
+          margin-left: 5px;
+          font-size: 14px;
+        }
       }
     }
 
     .chevron {
       position: absolute;
-      right: 15px;
       top: 10px;
-      background: #ffffff;
-      width: 34px;
-      height: 30px;
-      top: 7px;
-      right: 0px;
-      padding-top: 2px;
-      border-right: 1px solid #e4e7ec;
+      right: 10px;
     }
   }
 

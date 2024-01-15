@@ -238,13 +238,13 @@ export default {
       input2: "",
       firstSelect: { show: true, name: "none" },
       optionSelect: [
-        { name: "select1", value: "1" },
+        { name: "select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1", value: "1" },
         { name: "select2", value: "2" },
         { name: "select3", value: "3" },
       ],
       input3: "",
       optionSelect2: [
-        { name: "select1", value: "1" },
+        { name: "select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1select1", value: "1" },
         { name: "select2", value: "2" },
         { name: "select3", value: "3" },
       ],

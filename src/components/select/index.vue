@@ -203,6 +203,8 @@ $color-background: #ffffff;
       display: flex;
       align-items: center;
       white-space: nowrap;
+      margin-right: 25px;
+      overflow: hidden;
 
       .dot {
         width: 10px;
@@ -216,19 +218,14 @@ $color-background: #ffffff;
 
   .colorBlack .name-dropdown {
     color: $color-text;
-    padding-right: 10px;
     opacity: 1;
   }
 
   .pointer,
   .disabled {
-    width: 39px;
-    height: 24px;
     position: absolute;
-    right: 0px;
+    right: 10px;
     top: 10px;
-    padding-right: 15px;
-    border-right: 1px solid #e4e7ec;
   }
 
   .pointer {

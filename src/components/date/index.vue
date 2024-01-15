@@ -199,7 +199,6 @@ $color-background: #ffffff;
     width: 20px;
     height: 20px;
     margin-right: 12px;
-    padding-left: 6px;
     background-color: white;
     cursor: pointer;
   }
@@ -270,7 +269,7 @@ $color-background: #ffffff;
   background-color: $color-background;
   width: 100%;
   height: 44px;
-  padding: 11px 16px 10px;
+  padding: 11px 41px 10px 16px;
 }
 
 .dp__input_icon {
@@ -283,10 +282,10 @@ $color-background: #ffffff;
 }
 
 .dp__clear_icon {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background-color: #ffffff;
-  padding: 8px 6px 6px 4px;
+  padding: 0px 6px;
   right: 33px;
 }
 
