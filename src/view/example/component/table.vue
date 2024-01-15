@@ -1,5 +1,5 @@
 <template>
-  <div class="table">
+  <div class="table mb-5">
     <h2 class="name mb-4">table Component</h2>
     <cpn-table :columns="columns" :data="data" />
 
@@ -117,7 +117,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 26px 30px;
     padding-top: 0;
     overflow: auto;
     margin-bottom: 1px;
@@ -144,7 +143,7 @@ export default {
           font-weight: bold;
           font-size: 16px;
           color: #333333;
-          height: 71px;
+          height: 61px;
 
           th {
             border-bottom: solid 1px #c1cfe3;
@@ -183,7 +182,7 @@ export default {
 
         .tbody-row {
           width: 100%;
-          height: 70px;
+          height: 60px;
           text-align: center;
           color: #333333;
           border-bottom: 0px;

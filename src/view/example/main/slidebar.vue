@@ -125,7 +125,7 @@
         </div>
       </div>
       <div class="footer">
-        <div class="navigation">
+        <div class="navigation" :style="hamburger ? 'width: 100%;' : ''">
           <div class="group-navbar-item">
             <div class="navbar-item pointer none-a" @click="logoutClick()">
               <div class="image-navbar">

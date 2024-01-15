@@ -87,7 +87,7 @@ export default {
         font-weight: bold;
         font-size: 16px;
         color: #333333;
-        height: 71px;
+        height: 61px;
 
         th {
           border-bottom: solid 1px #c1cfe3;
@@ -100,7 +100,7 @@ export default {
     .tbody {
       .tbody-row {
         width: 100%;
-        height: 70px;
+        height: 60px;
         text-align: center;
         color: #333333;
         border-bottom: 0px;

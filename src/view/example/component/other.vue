@@ -31,7 +31,7 @@
       <!-- Modal bootstrap -->
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary  mb-2"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
@@ -138,13 +138,10 @@ export default {
   border: 0px;
   padding: 22px 29px;
 
-  .group-input {
-    margin-bottom: 22px;
-
-    .name {
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
+  button {
+    padding: 9px 20px;
+    font-size: 16px;
+    border-radius: 8px;
   }
 }
 </style>
