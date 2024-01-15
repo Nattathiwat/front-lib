@@ -302,6 +302,9 @@ export default {
           this.navigation[item.navigation] = true;
         }
       });
+      if (this.mobile && this.hamburger) {
+        this.$emit("hamburger");
+      }
     },
     focusoutBtn(e) {
       if (this.$refs.mainSlidebar) {
