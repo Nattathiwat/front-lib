@@ -147,6 +147,7 @@ export default {
     background-color: #fff;
     border: 0px;
     padding: 22px 29px;
+    position: static;
 
     button {
       padding: 9px 20px;
