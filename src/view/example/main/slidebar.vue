@@ -29,13 +29,15 @@
         <div class="navigation" :style="hamburger ? 'width: 100%;' : ''">
           <div class="line"></div>
           <ul
-            v-for="(item, index) in requiresAuthTop"
-            :key="index"
             class="slidebar-nav"
-            v-show="!item.hide"
             :style="hamburger ? 'width: 100%;' : ''"
           >
-            <li class="nav-item">
+            <li 
+              v-for="(item, index) in requiresAuthTop"
+              :key="index"
+              v-show="!item.hide"
+              class="nav-item"
+            >
               <router-link
                 v-if="!item.sub"
                 class="nav-link pointer none-a"
@@ -95,36 +97,34 @@
               >
                 <div v-show="navigation[item.navigation]">
                   <ul class="slidebar-nav-sub">
-                    <template v-for="(item_sub, index_sub) in item.sub">
-                      <li 
-                        v-if="item_sub"
-                        :key="index_sub"
-                        class="nav-sub-item">
-                        <router-link
-                          class="nav-sub-link pointer none-a"
-                          :class="{
-                            active:
-                              item_sub.active.indexOf('/' + $route.name + '/') !=
-                              -1,
-                          }"
-                          :to="item_sub.to"
-                        >
-                          <i>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="8"
-                              height="8"
-                              class="bi bi-circle-fill"
-                              viewBox="0 0 16 16"
-                              fill="#667085"
-                            >
-                              <circle cx="8" cy="8" r="8" />
-                            </svg>
-                          </i>
-                          <p class="name">{{ item_sub.name }}</p>
-                        </router-link>
-                      </li>
-                    </template>
+                    <li 
+                      v-for="(item_sub, index_sub) in item.sub"
+                      :key="index_sub"
+                      class="nav-sub-item">
+                      <router-link
+                        class="nav-sub-link pointer none-a"
+                        :class="{
+                          active:
+                            item_sub.active.indexOf('/' + $route.name + '/') !=
+                            -1,
+                        }"
+                        :to="item_sub.to"
+                      >
+                        <i>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="8"
+                            height="8"
+                            class="bi bi-circle-fill"
+                            viewBox="0 0 16 16"
+                            fill="#667085"
+                          >
+                            <circle cx="8" cy="8" r="8" />
+                          </svg>
+                        </i>
+                        <p class="name">{{ item_sub.name }}</p>
+                      </router-link>
+                    </li>
                   </ul>
                 </div>
               </transition>
@@ -384,7 +384,7 @@ export default {
       &:hover {
         width: 250px;
 
-        .navigation {
+        .navigation, .slidebar-nav {
           width: 100%;
         }
       }
@@ -460,55 +460,52 @@ export default {
         margin-bottom: 0;
 
         .nav-item {
-          margin-bottom: 5px;
-        }
-
-        .nav-link {
-          display: flex;
-          align-items: center;
-
-          .image-navbar {
-            width: 48px;
-            min-width: 48px;
-            height: 48px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-
-          .name {
-            color: #101828;
-            font-size: 16px;
-            font-weight: 400;
-            margin-bottom: 0;
-            margin-left: 10px;
-            min-width: 140px;
-          }
-
-          .chevron-down {
-            min-width: 30px;
-            transition: transform 0.5s;
-            text-align: center;
-          }
-
-          &.active,
-          &:hover {
-            border-radius: 8px;
-            background-color: rgba(0, 57, 181, 0.07);
-
-            .image-navbar svg path {
-              stroke: #344054;
-            }
-
-            .image-navbar2 svg path {
-              fill: #344054;
-            }
-          }
-        }
-
-        .nav-item {
+          margin-top: 5px;
           position: relative;
+
+          .nav-link {
+            display: flex;
+            align-items: center;
+
+            .image-navbar {
+              width: 48px;
+              min-width: 48px;
+              height: 48px;
+              border-radius: 6px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .name {
+              color: #101828;
+              font-size: 16px;
+              font-weight: 400;
+              margin-bottom: 0;
+              margin-left: 10px;
+              min-width: 140px;
+            }
+
+            .chevron-down {
+              min-width: 30px;
+              transition: transform 0.5s;
+              text-align: center;
+            }
+
+            &.active,
+            &:hover {
+              border-radius: 8px;
+              background-color: rgba(0, 57, 181, 0.07);
+
+              .image-navbar svg path {
+                stroke: #344054;
+              }
+
+              .image-navbar2 svg path {
+                fill: #344054;
+              }
+            }
+          }
 
           .slidebar-nav-sub {
             display: flex;
