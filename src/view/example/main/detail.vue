@@ -1,11 +1,11 @@
 <template>
-  <div :style="widthSize" class="main-detail">
+  <div :style="widthSize" class="content-wrapper">
     <router-view></router-view>
   </div>
 </template>
 <script>
 export default {
-  name: "main-detail",
+  name: "content-wrapper",
   data() {
     return {
       version: import.meta.env.VITE_APP_VERSION
@@ -27,7 +27,7 @@ export default {
 </script>
 <style lang="scss">
 .example-templete {
-  .main-detail {
+  .content-wrapper {
     transition: padding 0.5s ease-in-out;
     padding: 20px;
     padding-left: 90px;

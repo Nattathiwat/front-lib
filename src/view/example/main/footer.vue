@@ -1,10 +1,10 @@
 <template>
-  <div :style="widthSize" class="main-footer">
+  <footer :style="widthSize" class="main-footer">
     <div class="text">
       Terms of Service | Copyright © 2022 Example. All Rights Reserved
     </div>
     <div class="version">Version {{ version }}</div>
-  </div>
+  </footer>
 </template>
 <script>
 export default {

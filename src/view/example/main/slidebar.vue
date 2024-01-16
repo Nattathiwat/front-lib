@@ -1,5 +1,5 @@
 <template>
-  <div
+  <aside
     class="main-slidebar"
     :style="
       mobile && hamburger
@@ -7,7 +7,7 @@
         : ''
     "
   >
-    <div class="slidebar-navigation" :style="widthSize" ref="mainSlidebar">
+    <div class="slidebar" :style="widthSize" ref="mainSlidebar">
       <div class="navbar">
         <div class="group-logo">
           <div class="logo">
@@ -28,137 +28,147 @@
         </div>
         <div class="navigation" :style="hamburger ? 'width: 100%;' : ''">
           <div class="line"></div>
-          <div
+          <ul
             v-for="(item, index) in requiresAuthTop"
             :key="index"
-            class="group-navbar-item"
+            class="slidebar-nav"
             v-show="!item.hide"
+            :style="hamburger ? 'width: 100%;' : ''"
           >
-            <router-link
-              v-if="!item.sub"
-              class="navbar-item pointer none-a"
-              :class="{
-                active: item.active.indexOf('/' + $route.name + '/') != -1,
-              }"
-              :to="item.to"
-            >
-              <div
-                class="image-navbar"
-                :class="{ 'image-navbar2': item.navbar2 }"
-                v-html="item.svg"
-              ></div>
-              <div class="name">{{ item.name }}</div>
-            </router-link>
-            <div
-              v-else
-              class="navbar-item pointer none-a"
-              :class="{ active: item.active.indexOf($route.name) != -1 }"
-              @click="navigationOpen(item.navigation), $event.stopPropagation()"
-            >
-              <div
-                class="image-navbar"
-                :class="{ 'image-navbar2': item.navbar2 }"
-                v-html="item.svg"
-              ></div>
-              <div class="name">
-                {{ item.name }}
-              </div>
-              <div
-                class="chevron-down"
-                :style="
-                  navigation[item.navigation]
-                    ? 'transform: rotate(0deg);'
-                    : 'transform: rotate(90deg);'
-                "
+            <li class="nav-item">
+              <router-link
+                v-if="!item.sub"
+                class="nav-link pointer none-a"
+                :class="{
+                  active: item.active.indexOf('/' + $route.name + '/') != -1,
+                }"
+                :to="item.to"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  fill="#344054"
-                  class="bi bi-caret-down-fill"
-                  viewBox="0 0 16 16"
+                <i
+                  class="image-navbar"
+                  :class="{ 'image-navbar2': item.navbar2 }"
+                  v-html="item.svg"
+                ></i>
+                <p class="name">{{ item.name }}</p>
+              </router-link>
+              <a
+                v-else
+                class="nav-link pointer none-a"
+                :class="{ active: item.active.indexOf($route.name) != -1 }"
+                @click="navigationOpen(item.navigation), $event.stopPropagation()"
+              >
+                <i
+                  class="image-navbar"
+                  :class="{ 'image-navbar2': item.navbar2 }"
+                  v-html="item.svg"
+                ></i>
+                <p class="name">
+                  {{ item.name }}
+                </p>
+                <i
+                  class="chevron-down"
+                  :style="
+                    navigation[item.navigation]
+                      ? 'transform: rotate(0deg);'
+                      : 'transform: rotate(90deg);'
+                  "
                 >
-                  <path
-                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
-                  />
-                </svg>
-              </div>
-            </div>
-            <transition
-              name="transition"
-              @enter="assetsUtils.enter"
-              @after-enter="assetsUtils.afterEnter"
-              @leave="assetsUtils.leave"
-            >
-              <div v-show="navigation[item.navigation]">
-                <div class="navbar-item-sub">
-                  <template v-for="(item_sub, index_sub) in item.sub">
-                    <router-link
-                      v-if="item_sub"
-                      :key="index_sub"
-                      class="sub-item pointer none-a"
-                      :class="{
-                        active:
-                          item_sub.active.indexOf('/' + $route.name + '/') !=
-                          -1,
-                      }"
-                      :to="item_sub.to"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="8"
-                        height="8"
-                        class="bi bi-circle-fill"
-                        viewBox="0 0 16 16"
-                        fill="#667085"
-                      >
-                        <circle cx="8" cy="8" r="8" />
-                      </svg>
-                      <div class="name">{{ item_sub.name }}</div>
-                    </router-link>
-                  </template>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    fill="#344054"
+                    class="bi bi-caret-down-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                    />
+                  </svg>
+                </i>
+              </a>
+              <transition
+                name="transition"
+                @enter="assetsUtils.enter"
+                @after-enter="assetsUtils.afterEnter"
+                @leave="assetsUtils.leave"
+              >
+                <div v-show="navigation[item.navigation]">
+                  <ul class="slidebar-nav-sub">
+                    <template v-for="(item_sub, index_sub) in item.sub">
+                      <li 
+                        v-if="item_sub"
+                        :key="index_sub"
+                        class="nav-sub-item">
+                        <router-link
+                          class="nav-sub-link pointer none-a"
+                          :class="{
+                            active:
+                              item_sub.active.indexOf('/' + $route.name + '/') !=
+                              -1,
+                          }"
+                          :to="item_sub.to"
+                        >
+                          <i>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="8"
+                              height="8"
+                              class="bi bi-circle-fill"
+                              viewBox="0 0 16 16"
+                              fill="#667085"
+                            >
+                              <circle cx="8" cy="8" r="8" />
+                            </svg>
+                          </i>
+                          <p class="name">{{ item_sub.name }}</p>
+                        </router-link>
+                      </li>
+                    </template>
+                  </ul>
                 </div>
-              </div>
-            </transition>
-          </div>
+              </transition>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="footer">
         <div class="navigation" :style="hamburger ? 'width: 100%;' : ''">
-          <div class="group-navbar-item">
-            <div class="navbar-item pointer none-a" @click="logoutClick()">
-              <div class="image-navbar">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="#667085"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M21 2C21.5128 2 21.9355 2.38604 21.9933 2.88338L22 3V21C22 21.5128 21.614 21.9355 21.1166 21.9933L21 22H15C14.4477 22 14 21.5523 14 21C14 20.4872 14.386 20.0645 14.8834 20.0067L15 20H20V4H15C14.4872 4 14.0645 3.61396 14.0067 3.11662L14 3C14 2.48716 14.386 2.06449 14.8834 2.00673L15 2H21ZM10.6129 6.2097L10.7071 6.29289L15.7071 11.2929C16.0676 11.6534 16.0953 12.2206 15.7903 12.6129L15.7071 12.7071L10.7071 17.7071C10.3166 18.0976 9.68342 18.0976 9.29289 17.7071C8.93241 17.3466 8.90468 16.7794 9.2097 16.3871L9.29289 16.2929L12.585 13H3C2.44772 13 2 12.5523 2 12C2 11.4872 2.38604 11.0645 2.88338 11.0067L3 11H12.585L9.29289 7.70711C8.93241 7.34662 8.90468 6.77939 9.2097 6.3871L9.29289 6.29289C9.62334 5.96245 10.1275 5.91161 10.5114 6.14038L10.6129 6.2097Z"
-                    stroke-width="0"
-                  />
-                </svg>
-              </div>
-              <div class="name">ออกจากระบบ</div>
-            </div>
-          </div>
+          <ul class="slidebar-nav" :style="hamburger ? 'width: 100%;' : ''">
+            <li class="nav-item">
+              <a class="nav-link pointer none-a" @click="logoutClick()">
+                <i class="image-navbar">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="#667085"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M21 2C21.5128 2 21.9355 2.38604 21.9933 2.88338L22 3V21C22 21.5128 21.614 21.9355 21.1166 21.9933L21 22H15C14.4477 22 14 21.5523 14 21C14 20.4872 14.386 20.0645 14.8834 20.0067L15 20H20V4H15C14.4872 4 14.0645 3.61396 14.0067 3.11662L14 3C14 2.48716 14.386 2.06449 14.8834 2.00673L15 2H21ZM10.6129 6.2097L10.7071 6.29289L15.7071 11.2929C16.0676 11.6534 16.0953 12.2206 15.7903 12.6129L15.7071 12.7071L10.7071 17.7071C10.3166 18.0976 9.68342 18.0976 9.29289 17.7071C8.93241 17.3466 8.90468 16.7794 9.2097 16.3871L9.29289 16.2929L12.585 13H3C2.44772 13 2 12.5523 2 12C2 11.4872 2.38604 11.0645 2.88338 11.0067L3 11H12.585L9.29289 7.70711C8.93241 7.34662 8.90468 6.77939 9.2097 6.3871L9.29289 6.29289C9.62334 5.96245 10.1275 5.91161 10.5114 6.14038L10.6129 6.2097Z"
+                      stroke-width="0"
+                    />
+                  </svg>
+                </i>
+                <p class="name">ออกจากระบบ</p>
+              </a>
+            </li>
+          </ul>
         </div>
-        <div class="avatar">
+        <div class="user-panel">
           <img
             src="@/assets/icon/sidebar/Avatar.svg"
-            alt="Avatar"
-            class="avatar-img"
+            alt="user-image"
+            class="user-image"
           />
-          <div class="name">ทดสอบ ทดสอบ</div>
+          <p class="name">ทดสอบ ทดสอบ</p>
         </div>
       </div>
     </div>
-  </div>
+  </aside>
 </template>
 <script>
 export default {
@@ -355,7 +365,7 @@ export default {
     z-index: 4;
     cursor: pointer;
 
-    .slidebar-navigation {
+    .slidebar {
       width: 70px;
       height: 100%;
       border: 1px solid #eaecf0;
@@ -419,12 +429,12 @@ export default {
         margin-top: auto;
         padding: 0 10px 24px;
 
-        .avatar {
+        .user-panel {
           margin-top: 16px;
           display: flex;
           align-items: center;
 
-          .avatar-img {
+          .user-image {
             width: 48px;
             height: 48px;
           }
@@ -433,20 +443,27 @@ export default {
             color: #101828;
             font-size: 18px;
             font-weight: 600;
+            margin-bottom: 0;
             margin-left: 10px;
             min-width: 170px;
           }
         }
       }
 
-      .navigation {
+      .slidebar-nav {
         display: flex;
         flex-direction: column;
         width: 48px;
         transition: width 0.5s ease-in-out;
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0;
 
-        .navbar-item {
+        .nav-item {
           margin-bottom: 5px;
+        }
+
+        .nav-link {
           display: flex;
           align-items: center;
 
@@ -464,6 +481,7 @@ export default {
             color: #101828;
             font-size: 16px;
             font-weight: 400;
+            margin-bottom: 0;
             margin-left: 10px;
             min-width: 140px;
           }
@@ -489,18 +507,24 @@ export default {
           }
         }
 
-        .group-navbar-item {
+        .nav-item {
           position: relative;
 
-          .navbar-item-sub {
+          .slidebar-nav-sub {
             display: flex;
             flex-direction: column;
             transition: height 0.5s ease-in-out;
             overflow: hidden;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
 
-            .sub-item {
+            .nav-sub-item {
+              margin-top: 5px;
+            } 
+
+            .nav-sub-link {
               padding: 8px 0;
-              margin-bottom: 5px;
               cursor: pointer;
               color: #101828;
               display: flex;
@@ -513,6 +537,7 @@ export default {
               .name {
                 font-size: 16px;
                 font-weight: 400;
+                margin-bottom: 0;
                 margin-left: 10px;
                 min-width: 170px;
               }

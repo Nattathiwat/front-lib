@@ -1,27 +1,35 @@
 <template>
-  <div :style="widthSize" class="main-header">
-    <i
-      class="bi bi-list icon-hamburger pointer"
-      @click="hamburgerClick(), $event.stopPropagation()"
-    ></i>
-    <div class="breadcrumbs">
-      <div v-for="(item, index) in breadcrumbs" :key="index" class="group-text">
-        <img
-          src="@/assets/icon/breadcrumb/chevron.svg"
-          alt="chevron"
-          class="chevron"
-          v-show="item.label && index != 0"
-        />
-        <div
-          class="text"
-          :class="index == breadcrumbs.length - 1 ? 'active' : ''"
-          @click="$router.push({ ...item })"
-        >
-          {{ item.label }}
-        </div>
-      </div>
-    </div>
-  </div>
+  <nav :style="widthSize" class="main-header">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link pointer">
+          <i
+            class="bi bi-list icon-hamburger"
+            @click="hamburgerClick(), $event.stopPropagation()"
+          ></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <ol class="breadcrumbs">
+          <li v-for="(item, index) in breadcrumbs" :key="index" class="group-text">
+            <img
+              src="@/assets/icon/breadcrumb/chevron.svg"
+              alt="chevron"
+              class="chevron"
+              v-show="item.label && index != 0"
+            />
+            <a
+              class="text"
+              :class="index == breadcrumbs.length - 1 ? 'active' : ''"
+              @click="$router.push({ ...item })"
+            >
+              {{ item.label }}
+          </a>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </nav>
 </template>
 <script>
 export default {
@@ -41,9 +49,9 @@ export default {
   computed: {
     widthSize() {
       if (this.mobile) {
-        return "padding-left: 20px;";
+        return "padding-left: 0px;";
       } else {
-        return this.hamburger ? "padding-left: 270px;" : "";
+        return this.hamburger ? "padding-left: 250px;" : "";
       }
     },
     breadcrumbs() {
@@ -77,45 +85,78 @@ export default {
 <style lang="scss">
 .example-templete {
   .main-header {
-    height: 55px;
     display: flex;
     align-items: center;
-    padding-left: 90px;
+    padding-left: 70px;
     box-shadow: 7.4px 9.5px 13px 0 rgb(137 148 169 / 14%);
     font-size: 18px;
     color: #0f3a64;
     transition: padding 0.5s ease-in-out;
 
-    .icon-hamburger {
-      font-size: 24px;
-      margin-right: 25px;
-      margin-top: 6px;
-    }
-
-    .breadcrumbs {
+    .navbar-nav {
       display: flex;
-      margin-top: 4px;
+      flex-direction: row;
+      align-items: center;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
 
-      .group-text {
-        display: flex;
+      .nav-item {
+        margin: 0;
 
-        .chevron {
-          width: 24px;
-          height: 24px;
-          margin: -1px 4px 0px;
+        .nav-link {
+          padding: 12px 20px;
+
+          .icon-hamburger {
+            display: flex;
+            align-items: center;
+            color: rgba(0,0,0,.5);
+            font-size: 24px;
+          }
+
+          &:hover {
+            .icon-hamburger {
+              color: black;
+            }
+          }
         }
 
-        .text {
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 24px;
-          text-align: left;
-          color: #101828;
-          cursor: pointer;
+        .breadcrumbs {
+          display: flex;
+          padding: 0;
 
-          &.active {
-            font-weight: 600;
-            color: #0039b5;
+          .group-text {
+            display: flex;
+            align-items: center;
+
+            .chevron {
+              width: 24px;
+              height: 24px;
+              margin: -1px 4px 0px;
+            }
+
+            .text {
+              text-decoration: none;
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 35px;
+              text-align: left;
+              color: #101828;
+              cursor: pointer;
+              opacity: 0.7;
+
+
+              &.active {
+                font-weight: 600;
+                color: #0039b5;
+              }
+            }
+
+            &:hover {
+              .text {
+                opacity: 1;
+              }
+            }
           }
         }
       }
